@@ -4,9 +4,9 @@ CREATE TABLE easy_drinks
 (
   drink_name VARCHAR(20),
   main VARCHAR(20),
-  amount1 DEC(3.2),
+  amount1 DEC(3,2),
   second VARCHAR(20),
-  amount2 DEC (4.2),
+  amount2 DEC(4,2),
   directions VARCHAR(255)
 );
 
@@ -33,3 +33,5 @@ SELECT * FROM easy_drinks WHERE amount1 < 1.5;
 SELECT * FROM easy_drinks WHERE amount2 < '1';
 SELECT * FROM easy_drinks WHERE main > 'содовая';
 SELECT * FROM easy_drinks WHERE amount1 = '1.5'
+
+--
