@@ -150,3 +150,28 @@ WHERE location = 'Snappy Bagel' AND rating = 3;
 SELECT type FROM doughnut_ratings
 WHERE location = 'Snappy Bagel' OR rating = 3;
 -- нет совпадений
+
+--запросы со стр. 131
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating <> 6;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating = 3;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' AND rating >= 6;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating > 5;
+-- с глазурью / NULL / с вареньем
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating = 3;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' OR rating = 6;
+-- NULL
