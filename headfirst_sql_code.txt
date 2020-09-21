@@ -39,7 +39,7 @@ CREATE TABLE drink_info
 (
   drink_name VARCHAR(20),
   cost DEC(4,2),
-  carb DEC(5,2),
+  carbs DEC(5,2),
   color VARCHAR(20),
   ice CHAR,
   calories INT(3)
@@ -150,3 +150,126 @@ WHERE location = 'Snappy Bagel' AND rating = 3;
 SELECT type FROM doughnut_ratings
 WHERE location = 'Snappy Bagel' OR rating = 3;
 -- нет совпадений
+
+--запросы со стр. 131
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating <> 6;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating = 3;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' AND rating >= 6;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating > 5;
+-- с глазурью / NULL / с вареньем
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating = 3;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' OR rating = 6;
+-- NULL
+
+--Проверка диапазонов с использованием AND и операторов сравнения
+SELECT drink_name FROM drink_info
+WHERE
+calories >= 30
+AND
+calories <= 60;
+
+SELECT drink_name FROM drink_info
+WHERE calories BETWEEN 30 AND 60;
+
+SELECT drink_name FROM drink_info
+WHERE calories <30 OR calories >60;
+
+SELECT drink_name FROM drink_info
+WHERE calories <=30 OR calories >=60;
+
+SELECT drink_name FROM drink_info
+WHERE drink_name BETWEEN 'Д' AND 'О';
+
+SELECT drink_name FROM drink_info
+WHERE NOT carbs BETWEEN 3 AND 5;
+
+SELECT drink_name FROM easy_drinks
+WHERE amount1 >= 1.50;
+
+SELECT drink_name FROM easy_drinks
+WHERE ice = 'Н';
+
+SELECT drink_name FROM easy_drinks
+WHERE calories >= 20;
+
+-- Таблица clown_info (стр.155)
+CREATE TABLE clown_info
+(
+  name VARCHAR(20),
+  last_seen VARCHAR(50),
+  appearance VARCHAR(60),
+  activities VARCHAR(40)
+);
+
+INSERT INTO clown_info
+VALUES
+('Элси', 'Дом престарелых Черри Хилл', 'Ж, рыжие волосы, зеленый костюм, огромные ботинки', 'шарики, машинки'),
+('Пиклз', 'Вечеринка Джека Грина', 'М, оранжевые волосы, синий костюм, огромные ботинки', 'мим'),
+('Снаглз', 'Болмарт', 'Ж, желтая рубашка, красные штаны', 'рожок, зонтик'),
+('Мистер Хобо', 'Цирк BG', 'М, сигара, черные волосы, маленькая шляпа', 'скрипка'),
+('Кларабелл', 'Дом престарелых Бельмонт', 'Ж, розовые волосы, большой цветок, синее платье', 'кричалки, танцы'),
+('Скутер', 'Больница Окленд', 'М, синие волосы, красный костюм, большой нос', 'шарики'),
+('Зиппо', 'Торговый центр Милстоун', 'Ж, оранжевый костюм, штаны', 'танцы'),
+('Бэйб', 'Автошкола Эрла', 'Ж, розовый костюм с блестками', 'эквилибристика, машинки'),
+('Бонзо', NULL , 'М, женское платье в горошек', 'пение, танцы'),
+('Снифлз', 'Заведение Трейси', 'М, зелено-фиолетовый костюс, длинный нос', NULL);
+
+--исправления со стр.158
+INSERT INTO clown_info
+VALUES
+('Снаглз', 'Болмарт', 'Ж, желтая рубашка, синие штаны', 'рожок, зонтик'),
+('Мистер Хобо', 'Вечеринка Эрика Грея', 'М, сигара, черные волосы, маленькая шляпа', 'скрипка'),
+('Зиппо', 'Торговый центр Милстоун', 'Ж, оранжевый костюм, штаны', 'пение, танцы'),
+('Бонзо', 'Парк Диксон' , 'М, женское платье в горошек', 'пение, танцы'),
+('Снифлз', 'Заведение Трейси', 'М, зелено-фиолетовый костюс, длинный нос', 'разъезжает на машинке');
+
+DELETE FROM clown_info WHERE activities = 'танцы';
+
+INSERT INTO clown_info
+VALUES
+('Кларабелл', 'Дом престарелых Бельмонт', 'Ж, розовые волосы, большой цветок, синее платье', 'танцы');
+
+DELETE FROM clown_info
+WHERE activities = 'кричалки, танцы'
+AND name = 'Кларабелл';
+
+--Замена данных в таблицах (стр.170-173)
+INSERT INTO drink_info
+VALUES
+('Поцелуй', 5.5, 42.5, 'фиолетовый', 'Д', 170);
+DELETE FROM drink_info WHERE calories = 171;
+
+INSERT INTO drink_info
+VALUES
+('Терновник', 3, 8.4, 'золотистый', 'Д', 33),
+('Борзая', 4, 14, 'золотистый', 'Д', 50);
+
+DELETE FROM drink_info
+WHERE color = 'желтый';
+--
+DELETE FROM drink_info
+WHERE cost = 2.50
+and cost = 3.50;
+
+INSERT INTO drink_info
+VALUES
+('Вот тебе на', 4.5, 8.6, 'оранжевый', 'Д', 35),
+('Голубая луна', 3.5, 3.2, 'синий', 'Д', 12),
+('Лаймовый фризз', 3.5, 5.4, 'зеленый', 'Д', 24);
+
+--
