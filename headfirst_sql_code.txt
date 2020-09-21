@@ -4,9 +4,9 @@ CREATE TABLE easy_drinks
 (
   drink_name VARCHAR(20),
   main VARCHAR(20),
-  amount1 DEC(3.2),
+  amount1 DEC(3,2),
   second VARCHAR(20),
-  amount2 DEC (4.2),
+  amount2 DEC(4,2),
   directions VARCHAR(255)
 );
 
@@ -18,7 +18,7 @@ VALUES
 ('Лаймовый физз', 'Sprite', 1.5, 'сок лайма', .75, 'взболтать со льдом, разлить по стаканам'),
 ('Поцелуй', 'вишнёвый сок', 2, 'абрикосовый нектар', 7, 'подавать со льдом и соломинкой'),
 ('Горячее золото', 'персиковый нектар', 3, 'апельсиновый сок', 6, 'влить в кружку горячий апельсиновый сок, добавить персиковый нектар'),
-('Одинокое дерево', 'содовая ', 1.5, 'вишнёвый сок', .75, 'взболтать со льдом, разлить по бокалам'),
+('Одинокое дерево', 'содовая', 1.5, 'вишнёвый сок', .75, 'взболтать со льдом, разлить по бокалам'),
 ('Борзая', 'содовая', 1.5, 'грейпфрутовый сок', 5, 'подавать со льдом, тщательно взболтать'),
 ('Бабье лето', 'яблочный сок', 2, 'горячий чай', 6, 'налить сок в кружку, добавить горячий чай'),
 ('Лягушка','холодный чай', 1.5, 'лимонад', 5, 'подавать на льду с ломтиком лайма'),
@@ -33,3 +33,120 @@ SELECT * FROM easy_drinks WHERE amount1 < 1.5;
 SELECT * FROM easy_drinks WHERE amount2 < '1';
 SELECT * FROM easy_drinks WHERE main > 'содовая';
 SELECT * FROM easy_drinks WHERE amount1 = '1.5'
+
+--таблица drink_info (стр. 122)
+CREATE TABLE drink_info
+(
+  drink_name VARCHAR(20),
+  cost DEC(4,2),
+  carb DEC(5,2),
+  color VARCHAR(20),
+  ice CHAR,
+  calories INT(3)
+);
+
+INSERT INTO drink_info
+VALUES
+('Терновник', 3, 8.4, 'желтый', 'Д', 33),
+('Голубая луна', 2.5, 3.2, 'синий', 'Д', 12),
+('Вот тебе на', 3.5, 8.6, 'оранжевый', 'Д', 35),
+('Лаймовый фризз', 2.5, 5.4, 'зеленый', 'Д', 24),
+('Поцелуй', 5.5, 42.5, 'фиолетовый', 'Д', 171),
+('Горячее золото', 3.2, 32.1, 'оранжевый', 'Н', 135),
+('Одинокое дерево', 3.6, 4.2, 'красный', 'Д', 17),
+('Борзая', 4, 14, 'желтый', 'Д', 50),
+('Бабье лето', 2.8, 7.2, 'коричневый', 'Н', 30),
+('Лягушка', 2.6, 21.5, 'бронзовый', 'Д', 80),
+('Сода плюс', 3.8, 4.7, 'красный', 'Н', 19);
+
+--Возьми в руку карандаш (стр. 123)
+--Цены желтых напитков со льдом, содержащих более 33 калорий.
+SELECT cost FROM drink_info
+WHERE ice = 'Д'
+and
+color = 'желтый'
+and
+calories > 33;
+
+--Названия и цвета напитков, содержащих не более 4 граммов углеводов,
+----в которые кладется лед.
+SELECT drink_name, color FROM drink_info
+WHERE carb > 4
+and
+ice = 'Д';
+
+--Цены напитков, содежащих 80 и более калорий.
+SELECT cost FROM drink_info
+WHERE calories >= 80;
+
+--Напитки «Борзая» и «Поцелуй», с цветом и информацией об использовании льда,
+----но без указания названий напитков в запросе!
+SELECT drink_name, color, ice FROM drink_info
+WHERE cost >= 3.9;
+
+-- SELECT drink_name FROM easy_drinks
+-- WHERE
+-- main = 'вишнёвый сок'
+-- or
+-- second  = 'вишнёвый сок';
+--
+-- SELECT drink_name FROM easy_drinks
+-- WHERE  main = 'апельсиновый сок' or main = 'яблочный сок';
+--
+-- SELECT drink_name FROM easy_drinks
+-- WHERE  main = 'апельсиновый сок' and main = 'яблочный сок';
+
+--Таблица doughnut_rating (стр. 130)
+CREATE TABLE doughnut_ratings
+(
+  location VARCHAR(25),
+  time TIME,
+  date DATE,
+  type VARCHAR (50),
+  rating INT(2),
+  comments VARCHAR(50)
+);
+
+INSERT INTO doughnut_ratings
+VALUES
+('Krispy King', ('8:50:00'), ('00-09-27'), 'с глазурью', 10, 'почти идеально'),
+('Duncan\'s Donuts', ('8:59:00'),('00-08-25'), NULL, 6, 'жирноваты'),
+('Starbuzz Coffee', ('19:35:00'), ('00-05-24'), 'с корицей', 5, 'вчерашние, но вкусные'),
+('Duncan\'s Donuts', ('19:03:00'), ('00-04-26'), 'с вареньем', 7, 'мало варенья');
+
+--запросы со стр.130
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating = 10;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating = 10;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' AND rating = 3;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Krispy King' OR rating = 3;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' AND rating = 3;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' OR rating = 10;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' OR rating = 10;
+-- с глазурью
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' AND rating = 3;
+-- нет совпадений
+
+SELECT type FROM doughnut_ratings
+WHERE location = 'Snappy Bagel' OR rating = 3;
+-- нет совпадений
