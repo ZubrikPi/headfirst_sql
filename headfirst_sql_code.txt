@@ -39,7 +39,7 @@ CREATE TABLE drink_info
 (
   drink_name VARCHAR(20),
   cost DEC(4,2),
-  carb DEC(5,2),
+  carbs DEC(5,2),
   color VARCHAR(20),
   ice CHAR,
   calories INT(3)
@@ -175,3 +175,36 @@ WHERE location = 'Krispy King' OR rating = 3;
 SELECT type FROM doughnut_ratings
 WHERE location = 'Snappy Bagel' OR rating = 6;
 -- NULL
+
+--Проверка диапазонов с использованием AND и операторов сравнения
+SELECT drink_name FROM drink_info
+WHERE
+calories >= 30
+AND
+calories <= 60;
+
+SELECT drink_name FROM drink_info
+WHERE calories BETWEEN 30 AND 60;
+
+SELECT drink_name FROM drink_info
+WHERE calories <30 OR calories >60;
+
+SELECT drink_name FROM drink_info
+WHERE calories <=30 OR calories >=60;
+
+SELECT drink_name FROM drink_info
+WHERE drink_name BETWEEN 'Д' AND 'О';
+
+SELECT drink_name FROM drink_info
+WHERE NOT carbs BETWEEN 3 AND 5;
+
+SELECT drink_name FROM easy_drinks
+WHERE amount1 >= 1.50;
+
+SELECT drink_name FROM easy_drinks
+WHERE ice = 'Н';
+
+SELECT drink_name FROM easy_drinks
+WHERE calories >= 20;
+
+-- 
