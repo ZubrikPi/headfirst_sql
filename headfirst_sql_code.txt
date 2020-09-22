@@ -273,3 +273,56 @@ VALUES
 ('Лаймовый фризз', 3.5, 5.4, 'зеленый', 'Д', 24);
 
 --
+INSERT INTO clown_info
+VALUES
+('Мистер Хобо', 'Заведение Трейси', 'М, сигара, черные волосы, маленькая шляпа', 'скрипка');
+
+SELEC FROM clown_info
+WHERE activities = 'танцы';
+
+-- Станте командой DELETE (стр.175-176)
+DELETE FROM clown_info
+WHERE last_seen = 'Больница Окленд';
+
+DELETE FROM clown_info
+WHERE activities = 'скрипка';
+
+DELETE FROM clown_info
+WHERE last_seen = 'Парк Диксон' AND
+name = 'Мистер Хобо';
+
+DELETE FROM clown_info
+WHERE last_seen = 'Больница Окленд' AND
+last_seen = 'Парк Диксон';
+
+DELETE FROM clown_info
+WHERE last_seen = 'Больница Окленд' OR
+last_seen = 'Парк Диксон';
+
+DELETE FROM clown_info
+WHERE name = 'Мистер Хобо' OR
+last_seen = 'Больница Окленд';
+
+DELETE FROM clown_info
+WHERE name = 'Мистер Хобо' AND
+last_seen = 'Заведение Трейси';
+
+SELECT FROM clown_info
+WHERE
+activities = 'танцы';
+INSERT INTO clown_info
+VALUES
+('Зиппо', 'Торговый центр Милстоун', 'Ж, оранжевый костюм, штаны', 'танцы, пение');
+DELETE FROM clown_info
+WHERE
+activities = 'танцы';
+
+--Команда Update (стр.180)
+---- Команда UPDATE начинается с ключевого слова UPDATE
+---- далее идёт ИМЯ_ТАБЛИЦЫ
+---- SET определяет изменения, вносимые в запись,
+---- после идёт ИМЯ_СТОЛБЦА = НОВОЕ ЗНАЧЕНИЕ
+---- WHERE ИМЯ_СТОЛБЦА = СТАРОЕ_ЗНАЧЕНИЕ;
+----- UPDATE table_name SET type = 'new values' WHERE type = 'old values'
+UPDATE doughnut_ratings
+SET type = 'глазированные' WHERE type = 'с глазурью';
