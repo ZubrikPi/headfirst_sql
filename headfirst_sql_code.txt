@@ -367,3 +367,5 @@ OR drink_name = 'Вот тебе на';
 UPDATE drink_info
 SET drink_name = 'Лаймовый Физз'
 WHERE drink_name = 'Лаймовый фризз';
+
+-- Глава 4
