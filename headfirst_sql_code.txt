@@ -326,3 +326,44 @@ activities = 'танцы';
 ----- UPDATE table_name SET type = 'new values' WHERE type = 'old values'
 UPDATE doughnut_ratings
 SET type = 'глазированные' WHERE type = 'с глазурью';
+
+--страница 182+
+INSERT INTO clown_info (appearance)
+VALUES
+('Мистер Хобо', 'Вечеринка Эрика Грея');
+
+UPDATE clown_info
+SET last_seen = 'Заведение Трейси'
+WHERE name = 'Мистер Хобо'
+AND last_seen = 'Вечеринка Эрика Грея';
+
+UPDATE clown_info
+SET activities = 'пение'
+WHERE name = 'Зиппо';
+
+INSERT INTO clown_info
+VALUES
+('Бонзо', 'Парк Диксон', 'М, женское платье в горошек', 'пение, танцы');
+
+INSERT INTO clown_info
+VALUES
+('Мистер Хобо', 'Вечеринка Эрика Грея', 'М, сигара, черные волосы, маленькая шляпа', скрипка);
+
+UPDATE clown_info
+SET appearance = 'Ж, оранжевый костюм, штаны'
+WHERE name = 'Зиппо';
+
+INSERT INTO clown_info
+VALUES
+('Кларабелл', 'Дом престарелых Бельмонт', 'Ж, розовые волосы, большой цветок, синее платье', 'кричалки, танцы'),
+('Скутер', 'Больница Окленд', 'М, синие волосы, красный костюм, большой нос', 'шарики');
+
+UPDATE drink_info
+SET cost = cost + 1
+WHERE drink_name = 'Голубая луна'
+OR drink_name = 'Лаймовый фризз'
+OR drink_name = 'Вот тебе на';
+
+UPDATE drink_info
+SET drink_name = 'Лаймовый Физз'
+WHERE drink_name = 'Лаймовый фризз';
