@@ -100,8 +100,8 @@ WHERE cost >= 3.9;
 CREATE TABLE doughnut_ratings
 (
   location VARCHAR(25),
-  time TIME,
-  date DATE,
+  `time` TIME,
+  `date` DATE,
   type VARCHAR (50),
   rating INT(2),
   comments VARCHAR(50)
@@ -368,4 +368,53 @@ UPDATE drink_info
 SET drink_name = 'Лаймовый Физз'
 WHERE drink_name = 'Лаймовый фризз';
 
+UPDATE easy_drinks
+SET main = 'спрайт'
+WHERE main = 'Sprite';
+
 -- Глава 4
+-- Таблица my_contacts (стр.220)
+CREATE TABLE my_contacts
+(
+  contacts_id INT NOT NULL,
+  last_name VARCHAR(30) default NULL,
+  first_name VARCHAR(20) default NULL,
+  email VARCHAR(50) default NULL,
+  gender char(1) default NULL,
+  birthday DATE default NULL,
+  profession VARCHAR(50) default NULL,
+  location VARCHAR(50) default NULL,
+  status VARCHAR(20) default NULL,
+  interests VARCHAR(100) default NULL,
+  seeking VARCHAR(100) default NULL,
+  PRIMARY KEY (contacts_id)
+);
+
+-- стр.223
+CREATE TABLE run
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(20),
+  last_name VARCHAR(30),
+  PRIMARY KEY (id)
+);
+-- команды для проверки
+INSERT INTO run (id, first_name, last_name)
+VALUES (NULL, 'Марсия', 'Брэди');
+-- true
+
+INSERT INTO run (id, first_name, last_name)
+VALUES (1, 'Джен', 'Брэди');
+-- false (- / * / *)
+
+INSERT INTO run
+VALUES ('', 'Бобби', 'Брэди');
+-- false (- / * / *)
+
+INSERT INTO run (first_name, last_name)
+VALUES ('Синди', 'Брэди');
+-- true
+
+INSERT INTO run (id, first_name, last_name)
+VALUES (99, 'Питер', 'Брэди');
+-- true
