@@ -434,3 +434,32 @@ VALUES ('Синди', 'Брэди');
 INSERT INTO run (id, first_name, last_name)
 VALUES (99, 'Питер', 'Брэди');
 -- true
+
+-- Команда ALTER
+ALTER TABLE my_contacts
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+--
+ALTER TABLE clown_info_2
+(
+  name VARCHAR(20) NOT NULL,
+  last_seen(30) NOT NULL,
+  state VARCHAR(2) NULL,
+  city VARCHAR(20) NULL,
+  street VARCHAR(25) NULL,
+  gender CHAR NULL,
+  dress_up VARCHAR(20) NULL,
+  dress_down VARCHAR(20) NULL,
+  dress_feather VARCHAR(20) NULL,
+  balls CHAR,
+  cars CHAR,
+  singer CHAR,
+  dancing CHAR,
+  screaming CHAR,
+  music CHAR,
+  activities VARCHAR
+);
+--
+ALTER TABLE clown_info_2
+ADD COLUMN phone VARCHAR(10);
+--
