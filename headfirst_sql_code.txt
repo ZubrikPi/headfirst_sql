@@ -1,10 +1,26 @@
+-- Таблица со страницы 83
+CREATE TABLE my_contacts
+(
+  first_name VARCHAR(20),
+  last_name VARCHAR(20),
+  email VARCHAR(50),
+  gender CHAR(1),
+  birthday DATE,
+  profession VARCHAR(50),
+  location VARCHAR(50),
+  status VARCHAR(20),
+  interests VARCHAR(100),
+  seeking VARCHAR(100)
+);
+--
+
 CREATE DATABASE drinks;
 
 CREATE TABLE easy_drinks
 (
   drink_name VARCHAR(20),
   main VARCHAR(20),
-  amount1 DEC(3,2),
+  amount1 DEC(4,2),
   second VARCHAR(20),
   amount2 DEC(4,2),
   directions VARCHAR(255)
@@ -15,7 +31,7 @@ VALUES
 ('Терновник', 'тоник', 1.5, 'ананасовый сок', 1, 'взболтать со льдом, разлить по бокалам, украсить лимонной цедрой'),
 ('Голубая луна', 'содовая', 1.5, 'черничный сок', .75, 'взболтать со льдом, разлить по бокалам, украсить лимонной цедрой'),
 ('Вот тебе на', 'персиковый нектар', 1, 'ананасовый сок', 1, 'взболтать со льдом, разлить по стаканам'),
-('Лаймовый физз', 'Sprite', 1.5, 'сок лайма', .75, 'взболтать со льдом, разлить по стаканам'),
+('Лаймовый физз', 'спрайт', 1.5, 'сок лайма', .75, 'взболтать со льдом, разлить по стаканам'),
 ('Поцелуй', 'вишнёвый сок', 2, 'абрикосовый нектар', 7, 'подавать со льдом и соломинкой'),
 ('Горячее золото', 'персиковый нектар', 3, 'апельсиновый сок', 6, 'влить в кружку горячий апельсиновый сок, добавить персиковый нектар'),
 ('Одинокое дерево', 'содовая', 1.5, 'вишнёвый сок', .75, 'взболтать со льдом, разлить по бокалам'),
@@ -25,7 +41,7 @@ VALUES
 ('Сода плюс','содовая', 2, 'виноградный сок', 1, 'взболтать в бокале, подавать без льда');
 
 --запросы на извлечение (стр. 96)
-SELECT * FROM easy_drinks WHERE main = 'Sprite';
+SELECT * FROM easy_drinks WHERE main = 'спрайт';
 SELECT * FROM easy_drinks WHERE main = 'содовая';
 SELECT * FROM easy_drinks WHERE amount2 = 6;
 SELECT * FROM easy_drinks WHERE second = 'апельсиновый сок';
@@ -100,8 +116,8 @@ WHERE cost >= 3.9;
 CREATE TABLE doughnut_ratings
 (
   location VARCHAR(25),
-  time TIME,
-  date DATE,
+  `time` TIME,
+  `date` DATE,
   type VARCHAR (50),
   rating INT(2),
   comments VARCHAR(50)
@@ -326,3 +342,124 @@ activities = 'танцы';
 ----- UPDATE table_name SET type = 'new values' WHERE type = 'old values'
 UPDATE doughnut_ratings
 SET type = 'глазированные' WHERE type = 'с глазурью';
+
+--страница 182+
+INSERT INTO clown_info (appearance)
+VALUES
+('Мистер Хобо', 'Вечеринка Эрика Грея');
+
+UPDATE clown_info
+SET last_seen = 'Заведение Трейси'
+WHERE name = 'Мистер Хобо'
+AND last_seen = 'Вечеринка Эрика Грея';
+
+UPDATE clown_info
+SET activities = 'пение'
+WHERE name = 'Зиппо';
+
+INSERT INTO clown_info
+VALUES
+('Бонзо', 'Парк Диксон', 'М, женское платье в горошек', 'пение, танцы');
+
+INSERT INTO clown_info
+VALUES
+('Мистер Хобо', 'Вечеринка Эрика Грея', 'М, сигара, черные волосы, маленькая шляпа', скрипка);
+
+UPDATE clown_info
+SET appearance = 'Ж, оранжевый костюм, штаны'
+WHERE name = 'Зиппо';
+
+INSERT INTO clown_info
+VALUES
+('Кларабелл', 'Дом престарелых Бельмонт', 'Ж, розовые волосы, большой цветок, синее платье', 'кричалки, танцы'),
+('Скутер', 'Больница Окленд', 'М, синие волосы, красный костюм, большой нос', 'шарики');
+
+UPDATE drink_info
+SET cost = cost + 1
+WHERE drink_name = 'Голубая луна'
+OR drink_name = 'Лаймовый фризз'
+OR drink_name = 'Вот тебе на';
+
+UPDATE drink_info
+SET drink_name = 'Лаймовый Физз'
+WHERE drink_name = 'Лаймовый фризз';
+
+UPDATE easy_drinks
+SET main = 'спрайт'
+WHERE main = 'Sprite';
+
+-- Глава 4
+-- Таблица my_contacts (стр.220)
+CREATE TABLE my_contacts
+(
+  contacts_id INT NOT NULL,
+  last_name VARCHAR(30) default NULL,
+  first_name VARCHAR(20) default NULL,
+  email VARCHAR(50) default NULL,
+  gender char(1) default NULL,
+  birthday DATE default NULL,
+  profession VARCHAR(50) default NULL,
+  location VARCHAR(50) default NULL,
+  status VARCHAR(20) default NULL,
+  interests VARCHAR(100) default NULL,
+  seeking VARCHAR(100) default NULL,
+  PRIMARY KEY (contacts_id)
+);
+
+-- стр.223
+CREATE TABLE run
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(20),
+  last_name VARCHAR(30),
+  PRIMARY KEY (id)
+);
+-- команды для проверки
+INSERT INTO run (id, first_name, last_name)
+VALUES (NULL, 'Марсия', 'Брэди');
+-- true
+
+INSERT INTO run (id, first_name, last_name)
+VALUES (1, 'Джен', 'Брэди');
+-- false (- / * / *)
+
+INSERT INTO run
+VALUES ('', 'Бобби', 'Брэди');
+-- false (- / * / *)
+
+INSERT INTO run (first_name, last_name)
+VALUES ('Синди', 'Брэди');
+-- true
+
+INSERT INTO run (id, first_name, last_name)
+VALUES (99, 'Питер', 'Брэди');
+-- true
+
+-- Команда ALTER
+ALTER TABLE my_contacts
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+--
+ALTER TABLE clown_info_2
+(
+  name VARCHAR(20) NOT NULL,
+  last_seen(30) NOT NULL,
+  state VARCHAR(2) NULL,
+  city VARCHAR(20) NULL,
+  street VARCHAR(25) NULL,
+  gender CHAR NULL,
+  dress_up VARCHAR(20) NULL,
+  dress_down VARCHAR(20) NULL,
+  dress_feather VARCHAR(20) NULL,
+  balls CHAR,
+  cars CHAR,
+  singer CHAR,
+  dancing CHAR,
+  screaming CHAR,
+  music CHAR,
+  activities VARCHAR
+);
+--
+ALTER TABLE clown_info_2
+ADD COLUMN phone VARCHAR(10);
+--
