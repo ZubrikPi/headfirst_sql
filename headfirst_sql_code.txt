@@ -435,11 +435,11 @@ INSERT INTO run (id, first_name, last_name)
 VALUES (99, 'Питер', 'Брэди');
 -- true
 
--- Команда ALTER
+-- команда ALTER
 ALTER TABLE my_contacts
 ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
 ADD PRIMARY KEY (contact_id);
---
+
 ALTER TABLE clown_info
 (
   name VARCHAR(20) NOT NULL,
@@ -487,11 +487,11 @@ CHANGE COLUMN `number` `proj_id` INT NOT NULL AUTO_INCREMENT,
 ADD PRIMARY KEY (`proj_id`);
 
 ALTER TABLE project_list
-CHANGE COLUMN descriptionofproj proj_desc VARCHAR(100),
+CHANGE COLUMN `descriptionofproj` `proj_desc` VARCHAR(100),
 CHANGE COLUMN contractoronjob con_name VARCHAR(30);
 
 ALTER TABLE project_list
-MODIFY COLUMN proj_desc VARCHAR(120);
+MODIFY COLUMN `proj_desc` VARCHAR(120);
 
 ALTER TABLE project_list
 ADD COLUMN `start_date` DATE,
@@ -502,4 +502,72 @@ ALTER TABLE project_list
 MODIFY `est_cost` DECIMAL(7,2);
 
 ALTER TABLE project_list
-DROP COLUMN start_date;
+DROP COLUMN `start_date`;
+
+-- таблица автомобилей стр.251
+
+CREATE TABLE hooptie
+(
+    color   VARCHAR(20)  NULL,
+    year    INT(4)       NULL,
+    make    VARCHAR(10)  NULL,
+    mo      VARCHAR(20)  NULL,
+    howmuch DECIMAL(8,3) NULL
+);
+
+INSERT INTO hooptie
+VALUES
+  ('серебристый', 1998, 'Porsche',  'Boxter',   17992.54),
+  (NULL,          2000, 'Jaguar',   'XJ',       15995),
+  ('красный',     2002, 'Cadillac', 'Escalade', 40215.9);
+
+/* CREATE TABLE staff (
+    PRIMARY KEY (staff_num),
+    staff_num      INT(5)       NOT NULL,
+    first_name     VARCHAR(100) NOT NULL,
+    pens_in_drawer INT(2)       NOT NULL,
+                   CONSTRAINT pens_in_drawer_range
+                   CHECK(pens_in_drawer BETWEEN 1 AND 99)
+); */
+
+-- Переименовываем таблицу
+ALTER TABLE hooptie
+RENAME TO   car_table;
+
+-- Добавляем первичный ключ
+ALTER TABLE car_table
+ADD COLUMN car_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (car_id);
+
+-- Добавляем колонку с VIN номером и размещаем второй позицией
+ALTER TABLE car_table
+ADD COLUMN VIN VARCHAR(16) AFTER car_id;
+
+-- Переименонываем колонку 'mo' на 'model'
+ALTER TABLE car_table
+CHANGE COLUMN mo model VARCHAR(20);
+
+-- Перемещение столбца 'color'
+ALTER TABLE car_table
+MODIFY COLUMN color VARCHAR(20) AFTER model;
+
+-- Перемещение столбца 'year'
+ALTER TABLE car_table
+MODIFY COLUMN year INT(4) AFTER color;
+
+-- Переименовываем 'howmuch' на 'price'
+ALTER TABLE car_table
+CHANGE COLUMN howmuch price DECIMAL(7,2);
+
+-- Итог:
+ALTER TABLE hooptie
+  RENAME TO car_table;
+ALTER TABLE car_table
+  ADD    COLUMN car_id        INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (car_id);
+ALTER TABLE car_table
+  ADD    COLUMN VIN           VARCHAR(16) AFTER car_id,
+  CHANGE COLUMN mo model      VARCHAR(20),
+  MODIFY COLUMN color         VARCHAR(20) AFTER model,
+  MODIFY COLUMN year          INT(4) AFTER color,
+  CHANGE COLUMN howmuch price DECIMAL(7,2);
