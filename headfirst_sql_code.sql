@@ -587,44 +587,77 @@ ALTER TABLE car_table
 -- 1НФ my_contacts
 CREATE TABLE `my_contacts`
 (
-  `contact_id` INT          NOT NULL AUTO_INCREMENT,
-  `last_name`  VARCHAR(30)  DEFAULT NULL,
-  `first_name` VARCHAR(20)  DEFAULT NULL,
-  `email`      VARCHAR(50)  DEFAULT NULL,
-  `gender`     CHAR(1),     DEFAULT NULL,
-  `birthday`   DATE,        DEFAULT NULL,
-  `profession` VARCHAR(50)  DEFAULT NULL,
-  `location`   VARCHAR(50)  DEFAULT NULL,
-  `status`     VARCHAR(20)  DEFAULT NULL,
-  `interests`  VARCHAR(100) DEFAULT NULL,
-  `seeking`    VARCHAR(100) DEFAULT NULL
-  PRIMARY KEY(contact_id)
+  last_name  VARCHAR(30)  DEFAULT NULL,
+  first_name VARCHAR(20)  DEFAULT NULL,
+  email      VARCHAR(50)  DEFAULT NULL,
+  gender     CHAR(1)      DEFAULT NULL,
+  birthday   DATE         DEFAULT NULL,
+  profession VARCHAR(50)  DEFAULT NULL,
+  location   VARCHAR(50)  DEFAULT NULL,
+  status     VARCHAR(20)  DEFAULT NULL,
+  interests  VARCHAR(100) DEFAULT NULL,
+  seeking    VARCHAR(100) DEFAULT NULL
 );
 
 INSERT INTO `my_contacts`
 VALUES
-('Anderson','Jillian','jill_anderson@breakneckpizza.com','F','1980-09-05','Technical Writer','Palo Alto, CA','single','kayaking, reptiles','relationship, friends'),
-('Kenton','Leo','lkenton@starbuzzcoffee.com','M','1974-01-10','Manager','San Francisco, CA','divorced','women','women to date'),
-('McGavin','Darrin',' captainlove@headfirsttheater.com','M','1966-01-23','Cruise Ship Captain','San Diego, CA','single','sailing, fishing, yachting','women for casual relationships'),
-('Franklin','Joe','joe_franklin@leapinlimos.com','M','1977-04-28','Software Sales','Dallas, TX','married','fishing, drinking','new job'),
-('Hamilton','Jamie','dontbother@starbuzzcoffee.com','F','1964-09-10','System Administrator','Princeton, NJ','married','RPG','nothing'),
-('Chevrolet','Maurice','bookman4u@objectville.net','M','1962-07-01','Bookshop Owner','Mountain View, CA','married','collecting books, scuba diving','friends'),
-('Kroger','Renee','poorrenee@mightygumball.net','F','1976-12-03','Unemployed','San Francisco, CA','divorced','cooking','employment'),
-('Mendoza','Angelina','angelina@starbuzzcoffee.com','F','1979-08-19','UNIX Sysadmin','San Francisco, CA','married','acting, dancing','new job'),
-('Murphy','Donald','padraic@tikibeanlounge.com','M','1967-01-23','Computer Programmer','New York City, NY','committed relationsh','RPG, anime','friends'),
-('Spatner','John','jpoet@objectville.net','M','1963-04-18','Salesman','Woodstock, NY','married','poetry, screenwriting','nothing');
+('Anderson','Jillian','jill_anderson@breakneckpizza.com','F',
+    '1980-09-05','Technical Writer','Palo Alto, CA',
+    'single','kayaking, reptiles','relationship, friends'),
+('Kenton','Leo','lkenton@starbuzzcoffee.com','M',
+    '1974-01-10','Manager','San Francisco, CA',
+    'divorced','women','women to date'),
+('McGavin','Darrin',' captainlove@headfirsttheater.com','M',
+    '1966-01-23','Cruise Ship Captain','San Diego, CA',
+    'single','sailing, fishing, yachting', 'women for relationships'),
+('Franklin','Joe','joe_franklin@leapinlimos.com','M',
+    '1977-04-28','Software Sales','Dallas, TX',
+    'married','fishing, drinking','new job'),
+('Hamilton','Jamie','dontbother@starbuzzcoffee.com','F',
+    '1964-09-10','System Administrator','Princeton, NJ',
+    'married','RPG','nothing'),
+('Chevrolet','Maurice','bookman4u@objectville.net','M',
+    '1962-07-01','Bookshop Owner','Mountain View, CA',
+    'married','collecting books, scuba diving','friends'),
+('Kroger','Renee','poorrenee@mightygumball.net','F',
+    '1976-12-03','Unemployed','San Francisco, CA',
+    'divorced','cooking','employment'),
+('Mendoza','Angelina','angelina@starbuzzcoffee.com','F',
+    '1979-08-19','UNIX Sysadmin','San Francisco, CA',
+    'married','acting, dancing','new job'),
+('Murphy','Donald','padraic@tikibeanlounge.com','M',
+    '1967-01-23','Computer Programmer','New York City, NY',
+    'committed relationsh','RPG, anime','friends'),
+('Spatner','John','jpoet@objectville.net','M',
+    '1963-04-18','Salesman','Woodstock, NY',
+    'married','poetry, screenwriting','nothing');
 
 INSERT INTO `my_contacts`
-(`last_name`,`first_name`,`email`,`gender`,`birthday`, `profession`,`location`)
+  (
+    `last_name`,
+    `first_name`,
+    `email`,
+    `gender`,
+    `birthday`,
+    `profession`,
+    `location`
+  )
 VALUES
-('Toth','Anne','Anne_Toth@leapinlimos.com','F', '1969-11-18', 'Artist','San Fran, CA'),
-('Manson','Anne','am86@objectville.net','F','1977-08-09', 'Baker','Seattle, WA'),
-('Hardy','Anne','anneh@b0tt0msup.com','F','1963-04-18', 'Teacher','San Fran, CA'),
-('Parker','Anne','annep@starbuzzcoffee.com','F','1983-01-10', 'Student','San Fran, CA'),
-('Blunt','Anne','anneblunt@breakneckpizza.com','F','1959-10-09', 'Web Designer','San Fran, CA'),
-('Jacobs','Anne','anne99@objectville.net','F','1968-02-05', 'Computer Programmer','San Jose, CA');
-
+  ('Toth','Anne','Anne_Toth@leapinlimos.com','F',
+      '1969-11-18', 'Artist','San Fran, CA'),
+  ('Manson','Anne','am86@objectville.net','F',
+      '1977-08-09', 'Baker','Seattle, WA'),
+  ('Hardy','Anne','anneh@b0tt0msup.com','F',
+      '1963-04-18', 'Teacher','San Fran, CA'),
+  ('Parker','Anne','annep@starbuzzcoffee.com','F',
+      '1983-01-10', 'Student','San Fran, CA'),
+  ('Blunt','Anne','anneblunt@breakneckpizza.com','F',
+      '1959-10-09', 'Web Designer','San Fran, CA'),
+  ('Jacobs','Anne','anne99@objectville.net','F',
+      '1968-02-05', 'Computer Programmer','San Jose, CA');
 
 ALTER TABLE my_contacts
   ADD COLUMN `city`  VARCHAR(50) DEFAULT NULL,
   ADD COLUMN `state` CHAR(2)     DEFAULT NULL;
+
+  
