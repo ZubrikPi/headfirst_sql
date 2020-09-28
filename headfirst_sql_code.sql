@@ -467,42 +467,42 @@ ADD COLUMN phone VARCHAR(10);
 
 CREATE TABLE projekts
 (
-  number INT(11) NULL DEFAULT NULL,
+  number INT(11)                NULL DEFAULT NULL,
   descriptionofproj VARCHAR(50) NULL DEFAULT NULL,
-  contractoronjob VARCHAR(10) NULL DEFAULT NULL
+  contractoronjob VARCHAR(10)   NULL DEFAULT NULL
 );
 
 INSERT INTO projekts
 VALUES
-(1, 'покраска дома', 'Мэрфи'),
-(2, 'перестройка кухни', 'Вальдес'),
-(3, 'укладка паркета', 'Келлер'),
-(4, 'кровельные работы', 'Джексон');
+  (1, 'покраска дома',     'Мэрфи'),
+  (2, 'перестройка кухни', 'Вальдес'),
+  (3, 'укладка паркета',   'Келлер'),
+  (4, 'кровельные работы', 'Джексон');
 --
 ALTER TABLE projekts
-RENAME TO project_list;
+  RENAME TO project_list;
 
 ALTER TABLE project_list
-CHANGE COLUMN `number` `proj_id` INT NOT NULL AUTO_INCREMENT,
+  CHANGE COLUMN `number` `proj_id` INT NOT NULL AUTO_INCREMENT,
 ADD PRIMARY KEY (`proj_id`);
 
 ALTER TABLE project_list
-CHANGE COLUMN `descriptionofproj` `proj_desc` VARCHAR(100),
-CHANGE COLUMN contractoronjob con_name VARCHAR(30);
+  CHANGE COLUMN `descriptionofproj` `proj_desc` VARCHAR(100),
+  CHANGE COLUMN contractoronjob con_name VARCHAR(30);
 
 ALTER TABLE project_list
-MODIFY COLUMN `proj_desc` VARCHAR(120);
+  MODIFY COLUMN `proj_desc` VARCHAR(120);
 
 ALTER TABLE project_list
-ADD COLUMN `start_date` DATE,
-ADD COLUMN `est_cost` DECIMAL(8,2),
-ADD COLUMN `con_phone` VARCHAR(14);
+  ADD COLUMN `start_date` DATE,
+  ADD COLUMN `est_cost` DECIMAL(8,2),
+  ADD COLUMN `con_phone` VARCHAR(14);
 
 ALTER TABLE project_list
-MODIFY `est_cost` DECIMAL(7,2);
+  MODIFY `est_cost` DECIMAL(7,2);
 
 ALTER TABLE project_list
-DROP COLUMN `start_date`;
+  DROP COLUMN `start_date`;
 
 -- таблица автомобилей стр.251
 
@@ -521,14 +521,16 @@ VALUES
   (NULL,          2000, 'Jaguar',   'XJ',       15995),
   ('красный',     2002, 'Cadillac', 'Escalade', 40215.9);
 
-/*  CREATE TABLE staff (
-    PRIMARY KEY (staff_num),
-    staff_num      INT(5)       NOT NULL,
-    first_name     VARCHAR(100) NOT NULL,
-    pens_in_drawer INT(2)       NOT NULL,
-                   CONSTRAINT pens_in_drawer_range
-                   CHECK(pens_in_drawer BETWEEN 1 AND 99)
-); */
+/*
+ *  CREATE TABLE staff (
+ *  PRIMARY KEY (staff_num),
+ *  staff_num      INT(5)       NOT NULL,
+ *  first_name     VARCHAR(100) NOT NULL,
+ *  pens_in_drawer INT(2)       NOT NULL,
+ *                 CONSTRAINT pens_in_drawer_range
+ *                 CHECK(pens_in_drawer BETWEEN 1 AND 99)
+ *  );
+ */
 
 -- Переименовываем таблицу
 ALTER TABLE hooptie
@@ -599,6 +601,12 @@ CREATE TABLE `my_contacts`
   seeking    VARCHAR(100) DEFAULT NULL
 );
 
+/*
+ * last_name, first_name, email, gender,
+ * birthday, profession, location,
+ * status, interests, seeking
+ */
+
 INSERT INTO `my_contacts`
 VALUES
 ('Anderson', 'Jillian', 'jill_anderson@breakneckpizza.com', 'F',
@@ -643,13 +651,8 @@ VALUES
 
 INSERT INTO `my_contacts`
   (
-    `last_name` ,
-    `first_name`,
-    `email`     ,
-    `gender`    ,
-    `birthday`  ,
-    `profession`,
-    `location`
+    `last_name`, `first_name`, `email`, `gender`,
+    `birthday`, `profession`, `location`
   )
 VALUES
   ('Toth', 'Anne',  'Anne_Toth@leapinlimos.com', 'F',
@@ -702,9 +705,11 @@ SET state = RIGHT(location, 2);
 UPDATE my_contacts
 SET city = SUBSTRING_INDEX(location, ',', 1);
 
-/*  Удаляем 'location'
-*   ALTER TABLE my_contacts
-*   DROP COLUMN location; */
+/*
+ *  Удаляем 'location'
+ *  ALTER TABLE my_contacts
+ *  DROP COLUMN location;
+ */
 
 -- создание таблицы movie_table (271)
 CREATE TABLE movie_table (
@@ -724,7 +729,7 @@ CREATE TABLE movie_table (
 INSERT INTO movie_table
 VALUES
   ('Большое приключение',          'G', 'Н', 'Н', 'Н',
-        'Н', 'Н', 'Д', 'Н', ''),
+        'Н', 'Н', 'Н', 'Д', ''),
   ('Грег: неизвестные истории',   'PG', 'Н', 'Н', 'Д',
         'Н', 'Н', 'Н', 'Н', ''),
   ('Безумные клоуны',              'R', 'Н', 'Н', 'Н',
@@ -761,7 +766,7 @@ SET category =
     ELSE 'разное'
 END;
 
-/*
+/* Исправление ошибки
 UPDATE movie_table
 SET cartoon = 'Д'
 WHERE title = 'Большое приключение';
@@ -774,3 +779,14 @@ WHERE title = 'Большое приключение';
 ALTER TABLE movie_table
 ADD COLUMN movie_id INT AUTO_INCREMENT FIRST,
 ADD PRIMARY KEY(`movie_id`);
+
+/* -- проверка запросов на сортировку
+ * SELECT contact_id, last_name, first_name
+ * FROM my_contacts
+ * WHERE last_name LIKE '%'
+ * ORDER BY last_name;
+ *
+ * -- удаление дубликатов из my_contacts
+ * DELETE FROM my_contacts WHERE contact_id = 1;
+ * DELETE FROM my_contacts WHERE contact_id = 2;
+ */
