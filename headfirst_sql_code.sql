@@ -652,23 +652,23 @@ INSERT INTO `my_contacts`
     `location`
   )
 VALUES
-  ('Toth', 'Anne', 'Anne_Toth@leapinlimos.com', 'F',
+  ('Toth', 'Anne',  'Anne_Toth@leapinlimos.com', 'F',
       '1969-11-18', 'Artist', 'San Fran, CA'),
 
   ('Manson', 'Anne', 'am86@objectville.net', 'F',
-      '1977-08-09', 'Baker', 'Seattle, WA'),
+      '1977-08-09',  'Baker', 'Seattle, WA'),
 
   ('Hardy', 'Anne', 'anneh@b0tt0msup.com', 'F',
       '1963-04-18', 'Teacher', 'San Fran, CA'),
 
   ('Parker', 'Anne', 'annep@starbuzzcoffee.com', 'F',
-      '1983-01-10', 'Student', 'San Fran, CA'),
+      '1983-01-10',  'Student', 'San Fran, CA'),
 
   ('Blunt', 'Anne', 'anneblunt@breakneckpizza.com', 'F',
       '1959-10-09', 'Web Designer', 'San Fran, CA'),
 
   ('Jacobs', 'Anne', 'anne99@objectville.net', 'F',
-      '1968-02-05', 'Computer Programmer', 'San Jose, CA');
+      '1968-02-05',  'Computer Programmer', 'San Jose, CA');
 
 ALTER TABLE my_contacts
   ADD COLUMN `city`  VARCHAR(50) DEFAULT NULL,
