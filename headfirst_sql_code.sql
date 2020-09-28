@@ -521,7 +521,7 @@ VALUES
   (NULL,          2000, 'Jaguar',   'XJ',       15995),
   ('красный',     2002, 'Cadillac', 'Escalade', 40215.9);
 
-/* CREATE TABLE staff (
+/*  CREATE TABLE staff (
     PRIMARY KEY (staff_num),
     staff_num      INT(5)       NOT NULL,
     first_name     VARCHAR(100) NOT NULL,
@@ -634,11 +634,11 @@ VALUES
 
 INSERT INTO `my_contacts`
   (
-    `last_name`,
+    `last_name` ,
     `first_name`,
-    `email`,
-    `gender`,
-    `birthday`,
+    `email`     ,
+    `gender`    ,
+    `birthday`  ,
     `profession`,
     `location`
   )
@@ -660,4 +660,99 @@ ALTER TABLE my_contacts
   ADD COLUMN `city`  VARCHAR(50) DEFAULT NULL,
   ADD COLUMN `state` CHAR(2)     DEFAULT NULL;
 
-  
+ALTER TABLE my_contacts
+  ADD COLUMN `contact_id` INT NOT NULL AUTO_INCREMENT FIRST,
+  ADD PRIMARY KEY(contact_id);
+
+-- изменение названия города
+UPDATE my_contacts
+SET location = 'San Francisco, CA'
+WHERE location = 'San Fran, CA';
+
+-- возврат штата в отдельную колонку (city, STATE)
+SELECT RIGHT (location, 2) FROM my_contacts;
+
+-- возврат названия города (CITY, state)
+SELECT SUBSTRING_INDEX(location, ',', 1)
+FROM my_contacts;
+
+-- Добавляем колонки в my_contacts
+ALTER TABLE my_contacts
+ADD COLUMN city VARCHAR(50) DEFAULT NULL,
+ADD COLUMN state CHAR(2)    DEFAULT NULL;
+
+-- Обновляем информацию в 'state' и 'city' из 'location'
+UPDATE my_contacts
+SET state = RIGHT(location, 2);
+
+UPDATE my_contacts
+SET city = SUBSTRING_INDEX(location, ',', 1);
+
+/*  Удаляем 'location'
+*   ALTER TABLE my_contacts
+*   DROP COLUMN location; */
+
+-- создание таблицы movie_table (271)
+CREATE TABLE movie_table (
+    title    VARCHAR(50) DEFAULT NULL,
+    rating   CHAR(2)     DEFAULT NULL,
+    drama    CHAR(1)     DEFAULT NULL,
+    comedy   CHAR(1)     DEFAULT NULL,
+    action   CHAR(1)     DEFAULT NULL,
+    gore     CHAR(1)     DEFAULT NULL,
+    scifi    CHAR(1)     DEFAULT NULL,
+    for_kids CHAR(1)     DEFAULT NULL,
+    cartoon  CHAR(1)     DEFAULT NULL,
+    category VARCHAR(25) DEFAULT NULL
+);
+
+-- внесение данных в movie_table (271)
+INSERT INTO movie_table
+VALUES
+  ('Большое приключение',          'G', 'Н', 'Н', 'Н',
+        'Н', 'Н', 'Д', 'Н', ''),
+  ('Грег: неизвестные истории',   'PG', 'Н', 'Н', 'Д',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Безумные клоуны',              'R', 'Н', 'Н', 'Н',
+        'Д', 'Н', 'Н', 'Н', ''),
+  ('Параскеведекатриафобия',       'R', 'Д', 'Д', 'Д',
+        'Н', 'Д', 'Н', 'Н', ''),
+  ('Крыса по имени Дарси',         'G', 'Н', 'Н', 'Н',
+        'Н', 'Д', 'Н', 'Н', ''),
+  ('Конец очереди',                'R', 'Д', 'Н', 'Н',
+        'Д', 'Д', 'Н', 'Д', ''),
+  ('Блестящие вещи',              'PG', 'Д', 'Н', 'Н',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Заберите обратно',             'R', 'Н', 'Д', 'Н',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Наживка для акул',             'G', 'Н', 'Н', 'Н',
+        'Н', 'Н', 'Д', 'Н', ''),
+  ('Разгеванный пират',           'PG', 'Н', 'Д', 'Н',
+        'Н', 'Н', 'Н', 'Д', ''),
+  ('Планета пригодна для жизни',  'PG', 'Н', 'Д', 'Н',
+        'Н', 'Д', 'Н', 'Н', '');
+
+-- назначение категории фильма через UPDATE + CASE (273)
+UPDATE movie_table
+SET category =
+  CASE
+    WHEN drama       = 'Д' THEN 'драма'
+    WHEN comedy      = 'Д' THEN 'комедия'
+    WHEN action      = 'Д' THEN 'боевик'
+    WHEN gore        = 'Д' THEN 'ужасы'
+    WHEN scifi       = 'Д' THEN 'фантастика'
+    WHEN for_kids    = 'Д' THEN 'семейное'
+    WHEN cartoon     = 'Д'
+          AND rating = 'G' THEN 'семейное'
+    ELSE 'разное'
+END;
+
+/*
+UPDATE movie_table
+SET cartoon = 'Д'
+WHERE title = 'Большое приключение';
+
+UPDATE movie_table
+SET for_kids = 'Н'
+WHERE title = 'Большое приключение';
+*/
