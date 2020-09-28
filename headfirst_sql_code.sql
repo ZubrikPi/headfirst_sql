@@ -521,7 +521,7 @@ VALUES
   (NULL,          2000, 'Jaguar',   'XJ',       15995),
   ('красный',     2002, 'Cadillac', 'Escalade', 40215.9);
 
-/* CREATE TABLE staff (
+/*  CREATE TABLE staff (
     PRIMARY KEY (staff_num),
     staff_num      INT(5)       NOT NULL,
     first_name     VARCHAR(100) NOT NULL,
@@ -587,44 +587,190 @@ ALTER TABLE car_table
 -- 1НФ my_contacts
 CREATE TABLE `my_contacts`
 (
-  `contact_id` INT          NOT NULL AUTO_INCREMENT,
-  `last_name`  VARCHAR(30)  DEFAULT NULL,
-  `first_name` VARCHAR(20)  DEFAULT NULL,
-  `email`      VARCHAR(50)  DEFAULT NULL,
-  `gender`     CHAR(1),     DEFAULT NULL,
-  `birthday`   DATE,        DEFAULT NULL,
-  `profession` VARCHAR(50)  DEFAULT NULL,
-  `location`   VARCHAR(50)  DEFAULT NULL,
-  `status`     VARCHAR(20)  DEFAULT NULL,
-  `interests`  VARCHAR(100) DEFAULT NULL,
-  `seeking`    VARCHAR(100) DEFAULT NULL
-  PRIMARY KEY(contact_id)
+  last_name  VARCHAR(30)  DEFAULT NULL,
+  first_name VARCHAR(20)  DEFAULT NULL,
+  email      VARCHAR(50)  DEFAULT NULL,
+  gender     CHAR(1)      DEFAULT NULL,
+  birthday   DATE         DEFAULT NULL,
+  profession VARCHAR(50)  DEFAULT NULL,
+  location   VARCHAR(50)  DEFAULT NULL,
+  status     VARCHAR(20)  DEFAULT NULL,
+  interests  VARCHAR(100) DEFAULT NULL,
+  seeking    VARCHAR(100) DEFAULT NULL
 );
 
 INSERT INTO `my_contacts`
 VALUES
-('Anderson','Jillian','jill_anderson@breakneckpizza.com','F','1980-09-05','Technical Writer','Palo Alto, CA','single','kayaking, reptiles','relationship, friends'),
-('Kenton','Leo','lkenton@starbuzzcoffee.com','M','1974-01-10','Manager','San Francisco, CA','divorced','women','women to date'),
-('McGavin','Darrin',' captainlove@headfirsttheater.com','M','1966-01-23','Cruise Ship Captain','San Diego, CA','single','sailing, fishing, yachting','women for casual relationships'),
-('Franklin','Joe','joe_franklin@leapinlimos.com','M','1977-04-28','Software Sales','Dallas, TX','married','fishing, drinking','new job'),
-('Hamilton','Jamie','dontbother@starbuzzcoffee.com','F','1964-09-10','System Administrator','Princeton, NJ','married','RPG','nothing'),
-('Chevrolet','Maurice','bookman4u@objectville.net','M','1962-07-01','Bookshop Owner','Mountain View, CA','married','collecting books, scuba diving','friends'),
-('Kroger','Renee','poorrenee@mightygumball.net','F','1976-12-03','Unemployed','San Francisco, CA','divorced','cooking','employment'),
-('Mendoza','Angelina','angelina@starbuzzcoffee.com','F','1979-08-19','UNIX Sysadmin','San Francisco, CA','married','acting, dancing','new job'),
-('Murphy','Donald','padraic@tikibeanlounge.com','M','1967-01-23','Computer Programmer','New York City, NY','committed relationsh','RPG, anime','friends'),
-('Spatner','John','jpoet@objectville.net','M','1963-04-18','Salesman','Woodstock, NY','married','poetry, screenwriting','nothing');
+('Anderson', 'Jillian', 'jill_anderson@breakneckpizza.com', 'F',
+    '1980-09-05', 'Technical Writer', 'Palo Alto, CA',
+    'single', 'kayaking, reptiles', 'relationship, friends'),
+
+('Kenton', 'Leo', 'lkenton@starbuzzcoffee.com', 'M',
+    '1974-01-10', 'Manager', 'San Francisco, CA',
+    'divorced', 'women', 'women to date'),
+
+('McGavin', 'Darrin', 'captainlove@headfirsttheater.com', 'M',
+    '1966-01-23', 'Cruise Ship Captain', 'San Diego, CA',
+    'single', 'sailing, fishing, yachting', 'women for relationships'),
+
+('Franklin', 'Joe', 'joe_franklin@leapinlimos.com', 'M',
+    '1977-04-28', 'Software Sales', 'Dallas, TX',
+    'married', 'fishing, drinking', 'new job'),
+
+('Hamilton', 'Jamie', 'dontbother@starbuzzcoffee.com', 'F',
+    '1964-09-10', 'System Administrator', 'Princeton, NJ',
+    'married', 'RPG', 'nothing'),
+
+('Chevrolet', 'Maurice', 'bookman4u@objectville.net', 'M',
+    '1962-07-01', 'Bookshop Owner', 'Mountain View, CA',
+    'married', 'collecting books, scuba diving', 'friends'),
+
+('Kroger', 'Renee', 'poorrenee@mightygumball.net', 'F',
+    '1976-12-03', 'Unemployed', 'San Francisco, CA',
+    'divorced', 'cooking', 'employment'),
+
+('Mendoza', 'Angelina', 'angelina@starbuzzcoffee.com', 'F',
+    '1979-08-19', 'UNIX Sysadmin', 'San Francisco, CA',
+    'married', 'acting, dancing', 'new job'),
+
+('Murphy', 'Donald', 'padraic@tikibeanlounge.com', 'M',
+    '1967-01-23', 'Computer Programmer', 'New York City, NY',
+    'committed relationsh', 'RPG, anime', 'friends'),
+
+('Spatner', 'John', 'jpoet@objectville.net', 'M',
+    '1963-04-18', 'Salesman','Woodstock, NY',
+    'married', 'poetry, screenwriting', 'nothing');
 
 INSERT INTO `my_contacts`
-(`last_name`,`first_name`,`email`,`gender`,`birthday`, `profession`,`location`)
+  (
+    `last_name` ,
+    `first_name`,
+    `email`     ,
+    `gender`    ,
+    `birthday`  ,
+    `profession`,
+    `location`
+  )
 VALUES
-('Toth','Anne','Anne_Toth@leapinlimos.com','F', '1969-11-18', 'Artist','San Fran, CA'),
-('Manson','Anne','am86@objectville.net','F','1977-08-09', 'Baker','Seattle, WA'),
-('Hardy','Anne','anneh@b0tt0msup.com','F','1963-04-18', 'Teacher','San Fran, CA'),
-('Parker','Anne','annep@starbuzzcoffee.com','F','1983-01-10', 'Student','San Fran, CA'),
-('Blunt','Anne','anneblunt@breakneckpizza.com','F','1959-10-09', 'Web Designer','San Fran, CA'),
-('Jacobs','Anne','anne99@objectville.net','F','1968-02-05', 'Computer Programmer','San Jose, CA');
+  ('Toth', 'Anne',  'Anne_Toth@leapinlimos.com', 'F',
+      '1969-11-18', 'Artist', 'San Fran, CA'),
 
+  ('Manson', 'Anne', 'am86@objectville.net', 'F',
+      '1977-08-09',  'Baker', 'Seattle, WA'),
+
+  ('Hardy', 'Anne', 'anneh@b0tt0msup.com', 'F',
+      '1963-04-18', 'Teacher', 'San Fran, CA'),
+
+  ('Parker', 'Anne', 'annep@starbuzzcoffee.com', 'F',
+      '1983-01-10',  'Student', 'San Fran, CA'),
+
+  ('Blunt', 'Anne', 'anneblunt@breakneckpizza.com', 'F',
+      '1959-10-09', 'Web Designer', 'San Fran, CA'),
+
+  ('Jacobs', 'Anne', 'anne99@objectville.net', 'F',
+      '1968-02-05',  'Computer Programmer', 'San Jose, CA');
 
 ALTER TABLE my_contacts
   ADD COLUMN `city`  VARCHAR(50) DEFAULT NULL,
   ADD COLUMN `state` CHAR(2)     DEFAULT NULL;
+
+ALTER TABLE my_contacts
+  ADD COLUMN `contact_id` INT NOT NULL AUTO_INCREMENT FIRST,
+  ADD PRIMARY KEY(contact_id);
+
+-- изменение названия города
+UPDATE my_contacts
+SET location = 'San Francisco, CA'
+WHERE location = 'San Fran, CA';
+
+-- возврат штата в отдельную колонку (city, STATE)
+SELECT RIGHT (location, 2) FROM my_contacts;
+
+-- возврат названия города (CITY, state)
+SELECT SUBSTRING_INDEX(location, ',', 1)
+FROM my_contacts;
+
+-- Добавляем колонки в my_contacts
+ALTER TABLE my_contacts
+ADD COLUMN city VARCHAR(50) DEFAULT NULL,
+ADD COLUMN state CHAR(2)    DEFAULT NULL;
+
+-- Обновляем информацию в 'state' и 'city' из 'location'
+UPDATE my_contacts
+SET state = RIGHT(location, 2);
+
+UPDATE my_contacts
+SET city = SUBSTRING_INDEX(location, ',', 1);
+
+/*  Удаляем 'location'
+*   ALTER TABLE my_contacts
+*   DROP COLUMN location; */
+
+-- создание таблицы movie_table (271)
+CREATE TABLE movie_table (
+    title    VARCHAR(50) DEFAULT NULL,
+    rating   CHAR(2)     DEFAULT NULL,
+    drama    CHAR(1)     DEFAULT NULL,
+    comedy   CHAR(1)     DEFAULT NULL,
+    action   CHAR(1)     DEFAULT NULL,
+    gore     CHAR(1)     DEFAULT NULL,
+    scifi    CHAR(1)     DEFAULT NULL,
+    for_kids CHAR(1)     DEFAULT NULL,
+    cartoon  CHAR(1)     DEFAULT NULL,
+    category VARCHAR(25) DEFAULT NULL
+);
+
+-- внесение данных в movie_table (271)
+INSERT INTO movie_table
+VALUES
+  ('Большое приключение',          'G', 'Н', 'Н', 'Н',
+        'Н', 'Н', 'Д', 'Н', ''),
+  ('Грег: неизвестные истории',   'PG', 'Н', 'Н', 'Д',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Безумные клоуны',              'R', 'Н', 'Н', 'Н',
+        'Д', 'Н', 'Н', 'Н', ''),
+  ('Параскеведекатриафобия',       'R', 'Д', 'Д', 'Д',
+        'Н', 'Д', 'Н', 'Н', ''),
+  ('Крыса по имени Дарси',         'G', 'Н', 'Н', 'Н',
+        'Н', 'Д', 'Н', 'Н', ''),
+  ('Конец очереди',                'R', 'Д', 'Н', 'Н',
+        'Д', 'Д', 'Н', 'Д', ''),
+  ('Блестящие вещи',              'PG', 'Д', 'Н', 'Н',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Заберите обратно',             'R', 'Н', 'Д', 'Н',
+        'Н', 'Н', 'Н', 'Н', ''),
+  ('Наживка для акул',             'G', 'Н', 'Н', 'Н',
+        'Н', 'Н', 'Д', 'Н', ''),
+  ('Разгеванный пират',           'PG', 'Н', 'Д', 'Н',
+        'Н', 'Н', 'Н', 'Д', ''),
+  ('Планета пригодна для жизни',  'PG', 'Н', 'Д', 'Н',
+        'Н', 'Д', 'Н', 'Н', '');
+
+-- назначение категории фильма через UPDATE + CASE (273)
+UPDATE movie_table
+SET category =
+  CASE
+    WHEN drama       = 'Д' THEN 'драма'
+    WHEN comedy      = 'Д' THEN 'комедия'
+    WHEN action      = 'Д' THEN 'боевик'
+    WHEN gore        = 'Д' THEN 'ужасы'
+    WHEN scifi       = 'Д' THEN 'фантастика'
+    WHEN for_kids    = 'Д' THEN 'семейное'
+    WHEN cartoon     = 'Д'
+          AND rating = 'G' THEN 'семейное'
+    ELSE 'разное'
+END;
+
+/*
+UPDATE movie_table
+SET cartoon = 'Д'
+WHERE title = 'Большое приключение';
+
+UPDATE movie_table
+SET for_kids = 'Н'
+WHERE title = 'Большое приключение';
+*/
+
+ALTER TABLE movie_table
+ADD COLUMN movie_id INT AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY(`movie_id`);
