@@ -770,3 +770,7 @@ UPDATE movie_table
 SET for_kids = 'Н'
 WHERE title = 'Большое приключение';
 */
+
+ALTER TABLE movie_table
+ADD COLUMN movie_id INT AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY(`movie_id`);
