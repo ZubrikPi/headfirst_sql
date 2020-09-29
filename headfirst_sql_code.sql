@@ -333,7 +333,8 @@ DELETE FROM clown_info
 WHERE
 activities = 'танцы';
 
---Команда Update (стр.180)
+/*
+Команда Update (стр.180)
 ---- Команда UPDATE начинается с ключевого слова UPDATE
 ---- далее идёт ИМЯ_ТАБЛИЦЫ
 ---- SET определяет изменения, вносимые в запись,
@@ -342,6 +343,7 @@ activities = 'танцы';
 ----- UPDATE table_name SET type = 'new VALUES' WHERE type = 'old VALUES'
 UPDATE doughnut_ratings
 SET type = 'глазированные' WHERE type = 'с глазурью';
+ */
 
 --страница 182+
 INSERT INTO clown_info (appearance)
@@ -766,27 +768,59 @@ SET category =
     ELSE 'разное'
 END;
 
-/* Исправление ошибки
-UPDATE movie_table
-SET cartoon = 'Д'
-WHERE title = 'Большое приключение';
-
-UPDATE movie_table
-SET for_kids = 'Н'
-WHERE title = 'Большое приключение';
-*/
+-- -- Исправление ошибки
+-- UPDATE movie_table
+-- SET cartoon = 'Д'
+-- WHERE title = 'Большое приключение';
+--
+-- UPDATE movie_table
+-- SET for_kids = 'Н'
+-- WHERE title = 'Большое приключение';
 
 ALTER TABLE movie_table
 ADD COLUMN movie_id INT AUTO_INCREMENT FIRST,
 ADD PRIMARY KEY(`movie_id`);
 
-/* -- проверка запросов на сортировку
- * SELECT contact_id, last_name, first_name
- * FROM my_contacts
- * WHERE last_name LIKE '%'
- * ORDER BY last_name;
- *
- * -- удаление дубликатов из my_contacts
- * DELETE FROM my_contacts WHERE contact_id = 1;
- * DELETE FROM my_contacts WHERE contact_id = 2;
- */
+-- запрос на сортировку
+SELECT   contact_id, last_name, first_name
+FROM     my_contacts
+WHERE    last_name LIKE '%'
+ORDER BY last_name;
+
+-- удаление дубликатов из my_contacts
+DELETE FROM my_contacts WHERE contact_id = 1;
+DELETE FROM my_contacts WHERE contact_id = 2;
+
+
+-- -- запрос на сортировку
+-- SELECT contact_id, last_name, first_name
+-- FROM my_contacts
+-- ORDER BY last_name;
+--
+-- SELECT* FROM my_contacts
+-- ORDER BY birthday;
+
+-- Задание (286)
+CREATE TABLE test_t
+(
+  test_chars CHAR(1) DEFAULT NULL
+);
+
+INSERT INTO test_t
+VALUES
+(0), (1), (2), (3),
+('A'), ('B'), ('C'), ('D'),
+('a'), ('b'), ('c'), ('d'),
+('!'), ('@'), ('#'), ('$'),
+('%'), ('^'), ('&'), ('*'),
+('('), (')'), ('-'), ('_'),
+('+'), ('='), ('['), (']'),
+('{'), ('}'), (';'), (':'),
+('\''), ('"'),('|'), ('`'),
+('~'), ('.'), (','), ('/'),
+('<'), ('>'), ('?'), ('\ '),
+(''), (' '), (NULL);
+
+-- добавление столбца 'purshased' в movie_table
+ALTER TABLE movie_table
+ADD COLUMN purshased DATE;
