@@ -333,7 +333,8 @@ DELETE FROM clown_info
 WHERE
 activities = 'танцы';
 
---Команда Update (стр.180)
+/*
+Команда Update (стр.180)
 ---- Команда UPDATE начинается с ключевого слова UPDATE
 ---- далее идёт ИМЯ_ТАБЛИЦЫ
 ---- SET определяет изменения, вносимые в запись,
@@ -342,6 +343,7 @@ activities = 'танцы';
 ----- UPDATE table_name SET type = 'new VALUES' WHERE type = 'old VALUES'
 UPDATE doughnut_ratings
 SET type = 'глазированные' WHERE type = 'с глазурью';
+ */
 
 --страница 182+
 INSERT INTO clown_info (appearance)
@@ -467,42 +469,42 @@ ADD COLUMN phone VARCHAR(10);
 
 CREATE TABLE projekts
 (
-  number INT(11) NULL DEFAULT NULL,
+  number INT(11)                NULL DEFAULT NULL,
   descriptionofproj VARCHAR(50) NULL DEFAULT NULL,
-  contractoronjob VARCHAR(10) NULL DEFAULT NULL
+  contractoronjob VARCHAR(10)   NULL DEFAULT NULL
 );
 
 INSERT INTO projekts
 VALUES
-(1, 'покраска дома', 'Мэрфи'),
-(2, 'перестройка кухни', 'Вальдес'),
-(3, 'укладка паркета', 'Келлер'),
-(4, 'кровельные работы', 'Джексон');
+  (1, 'покраска дома',     'Мэрфи'),
+  (2, 'перестройка кухни', 'Вальдес'),
+  (3, 'укладка паркета',   'Келлер'),
+  (4, 'кровельные работы', 'Джексон');
 --
 ALTER TABLE projekts
-RENAME TO project_list;
+  RENAME TO project_list;
 
 ALTER TABLE project_list
-CHANGE COLUMN `number` `proj_id` INT NOT NULL AUTO_INCREMENT,
+  CHANGE COLUMN `number` `proj_id` INT NOT NULL AUTO_INCREMENT,
 ADD PRIMARY KEY (`proj_id`);
 
 ALTER TABLE project_list
-CHANGE COLUMN `descriptionofproj` `proj_desc` VARCHAR(100),
-CHANGE COLUMN contractoronjob con_name VARCHAR(30);
+  CHANGE COLUMN `descriptionofproj` `proj_desc` VARCHAR(100),
+  CHANGE COLUMN contractoronjob con_name VARCHAR(30);
 
 ALTER TABLE project_list
-MODIFY COLUMN `proj_desc` VARCHAR(120);
+  MODIFY COLUMN `proj_desc` VARCHAR(120);
 
 ALTER TABLE project_list
-ADD COLUMN `start_date` DATE,
-ADD COLUMN `est_cost` DECIMAL(8,2),
-ADD COLUMN `con_phone` VARCHAR(14);
+  ADD COLUMN `start_date` DATE,
+  ADD COLUMN `est_cost` DECIMAL(8,2),
+  ADD COLUMN `con_phone` VARCHAR(14);
 
 ALTER TABLE project_list
-MODIFY `est_cost` DECIMAL(7,2);
+  MODIFY `est_cost` DECIMAL(7,2);
 
 ALTER TABLE project_list
-DROP COLUMN `start_date`;
+  DROP COLUMN `start_date`;
 
 -- таблица автомобилей стр.251
 
@@ -521,14 +523,16 @@ VALUES
   (NULL,          2000, 'Jaguar',   'XJ',       15995),
   ('красный',     2002, 'Cadillac', 'Escalade', 40215.9);
 
-/*  CREATE TABLE staff (
-    PRIMARY KEY (staff_num),
-    staff_num      INT(5)       NOT NULL,
-    first_name     VARCHAR(100) NOT NULL,
-    pens_in_drawer INT(2)       NOT NULL,
-                   CONSTRAINT pens_in_drawer_range
-                   CHECK(pens_in_drawer BETWEEN 1 AND 99)
-); */
+/*
+ *  CREATE TABLE staff (
+ *  PRIMARY KEY (staff_num),
+ *  staff_num      INT(5)       NOT NULL,
+ *  first_name     VARCHAR(100) NOT NULL,
+ *  pens_in_drawer INT(2)       NOT NULL,
+ *                 CONSTRAINT pens_in_drawer_range
+ *                 CHECK(pens_in_drawer BETWEEN 1 AND 99)
+ *  );
+ */
 
 -- Переименовываем таблицу
 ALTER TABLE hooptie
@@ -599,6 +603,12 @@ CREATE TABLE `my_contacts`
   seeking    VARCHAR(100) DEFAULT NULL
 );
 
+/* Шаблон для значений 'my_contacts' до окончания команды
+ * last_name, first_name, email, gender,
+ * birthday, profession, location,
+ * status, interests, seeking
+ */
+
 INSERT INTO `my_contacts`
 VALUES
 ('Anderson', 'Jillian', 'jill_anderson@breakneckpizza.com', 'F',
@@ -643,13 +653,8 @@ VALUES
 
 INSERT INTO `my_contacts`
   (
-    `last_name` ,
-    `first_name`,
-    `email`     ,
-    `gender`    ,
-    `birthday`  ,
-    `profession`,
-    `location`
+    `last_name`, `first_name`, `email`, `gender`,
+    `birthday`, `profession`, `location`
   )
 VALUES
   ('Toth', 'Anne',  'Anne_Toth@leapinlimos.com', 'F',
@@ -702,9 +707,11 @@ SET state = RIGHT(location, 2);
 UPDATE my_contacts
 SET city = SUBSTRING_INDEX(location, ',', 1);
 
-/*  Удаляем 'location'
-*   ALTER TABLE my_contacts
-*   DROP COLUMN location; */
+/*
+ *  Удаляем 'location'
+ *  ALTER TABLE my_contacts
+ *  DROP COLUMN location;
+ */
 
 -- создание таблицы movie_table (271)
 CREATE TABLE movie_table (
@@ -724,7 +731,7 @@ CREATE TABLE movie_table (
 INSERT INTO movie_table
 VALUES
   ('Большое приключение',          'G', 'Н', 'Н', 'Н',
-        'Н', 'Н', 'Д', 'Н', ''),
+        'Н', 'Н', 'Н', 'Д', ''),
   ('Грег: неизвестные истории',   'PG', 'Н', 'Н', 'Д',
         'Н', 'Н', 'Н', 'Н', ''),
   ('Безумные клоуны',              'R', 'Н', 'Н', 'Н',
@@ -761,16 +768,143 @@ SET category =
     ELSE 'разное'
 END;
 
-/*
-UPDATE movie_table
-SET cartoon = 'Д'
-WHERE title = 'Большое приключение';
-
-UPDATE movie_table
-SET for_kids = 'Н'
-WHERE title = 'Большое приключение';
-*/
+-- -- Исправление ошибки
+-- UPDATE movie_table
+-- SET cartoon = 'Д'
+-- WHERE title = 'Большое приключение';
+--
+-- UPDATE movie_table
+-- SET for_kids = 'Н'
+-- WHERE title = 'Большое приключение';
 
 ALTER TABLE movie_table
 ADD COLUMN movie_id INT AUTO_INCREMENT FIRST,
 ADD PRIMARY KEY(`movie_id`);
+
+-- запрос на сортировку
+SELECT   contact_id, last_name, first_name
+FROM     my_contacts
+WHERE    last_name LIKE '%'
+ORDER BY last_name;
+
+-- удаление дубликатов из my_contacts
+DELETE FROM my_contacts WHERE contact_id = 1;
+DELETE FROM my_contacts WHERE contact_id = 2;
+
+
+-- -- запрос на сортировку
+SELECT contact_id, last_name, first_name
+FROM my_contacts
+ORDER BY last_name;
+
+SELECT* FROM my_contacts
+ORDER BY birthday;
+
+-- Задание (286)
+CREATE TABLE test_t
+(
+  test_chars CHAR(1) DEFAULT NULL
+);
+
+INSERT INTO test_t
+VALUES
+(0), (1), (2), (3),
+('A'), ('B'), ('C'), ('D'),
+('a'), ('b'), ('c'), ('d'),
+('!'), ('@'), ('#'), ('$'),
+('%'), ('^'), ('&'), ('*'),
+('('), (')'), ('-'), ('_'),
+('+'), ('='), ('['), (']'),
+('{'), ('}'), (';'), (':'),
+('\''), ('"'),('|'), ('`'),
+('~'), ('.'), (','), ('/'),
+('<'), ('>'), ('?'), ('\ '),
+(''), (' '), (NULL);
+
+-- добавление столбца 'purshased' в movie_table
+ALTER TABLE movie_table
+ADD COLUMN purshased DATE;
+
+SELECT title, category
+FROM movie_table
+ORDER BY title ASC, category DESC;
+
+-- таблица 'cookie_sales'
+CREATE TABLE cookie_sales (
+  ID         int(11)      NOT NULL AUTO_INCREMENT,
+  first_name varchar(20)  NOT NULL,
+  sales      decimal(4,2) NOT NULL,
+  sale_date  date         NOT NULL,
+  PRIMARY KEY  (ID)
+);
+
+INSERT INTO `cookie_sales`
+   (`ID`,`first_name`,`sales`,`sale_date`)
+VALUES
+   ('1',  'Линдси', 32.02, '2007-03-12'),
+   ('2',  'Николь', 26.53, '2007-03-12'),
+   ('3',  'Бритни', 11.25, '2007-03-12'),
+   ('4',  'Эшли',   18.96, '2007-03-12'),
+   ('5',  'Линдси', 9.16,  '2007-03-11'),
+   ('6',  'Николь', 1.52,  '2007-03-11'),
+   ('7',  'Бритни', 43.21, '2007-03-11'),
+   ('8',  'Эшли',   8.05,  '2007-03-11'),
+   ('9',  'Линдси', 17.62, '2007-03-10'),
+   ('10', 'Николь', 24.19, '2007-03-10'),
+   ('11', 'Бритни', 3.40,  '2007-03-10'),
+   ('12', 'Эшли',   15.21, '2007-03-10'),
+   ('13', 'Линдси', 0.00,  '2007-03-09'),
+   ('14', 'Николь', 31.99, '2007-03-09'),
+   ('15', 'Бритни', 2.58,  '2007-03-09'),
+   ('16', 'Эшли',   0.00,  '2007-03-09'),
+   ('17', 'Линдси', 2.34,  '2007-03-08'),
+   ('18', 'Николь', 13.44, '2007-03-08'),
+   ('19', 'Бритни', 8.78,  '2007-03-08'),
+   ('20', 'Эшли',   26.82, '2007-03-08'),
+   ('21', 'Линдси', 3.71,  '2007-03-07'),
+   ('22', 'Николь', 0.56,  '2007-03-07'),
+   ('23', 'Бритни', 34.19, '2007-03-07'),
+   ('24', 'Эшли',   7.77,  '2007-03-07'),
+   ('25', 'Линдси', 16.23, '2007-03-06'),
+   ('26', 'Николь', 0.00,  '2007-03-06'),
+   ('27', 'Бритни', 4.50,  '2007-03-06'),
+   ('28', 'Эшли',   19.22, '2007-03-06');
+
+-- запрос на извлечение суммы продаж Николь
+SELECT SUM(sales)
+FROM   cookie_sales
+WHERE  first_name = 'Николь';
+
+-- команда на извлечение суммы продаж каждой девочки
+SELECT   first_name, SUM(sales)
+FROM     cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC;
+
+-- команда на извлечение средней выручки за день
+SELECT   first_name, AVG(sales)
+FROM     cookie_sales
+GROUP BY first_name;
+
+SELECT   first_name, SUM(sales), MIN(sales),
+         AVG(sales), MAX(sales), COUNT(sales)
+FROM     cookie_sales
+GROUP BY first_name;
+
+SELECT   first_name, COUNT(sales)
+FROM     cookie_sales
+GROUP BY first_name;
+
+SELECT DISTINCT sale_date
+FROM            cookie_sales
+ORDER BY        sale_date;
+
+SELECT DISTINCT sale_date, first_name
+FROM            cookie_sales
+ORDER BY        first_name;
+
+SELECT COUNT(DISTINCT sale_date)
+FROM   cookie_sales;
+
+SELECT first_name, COUNT(sale_date)
+FROM   cookie_sales;
