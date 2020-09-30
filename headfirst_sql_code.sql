@@ -885,23 +885,50 @@ ORDER BY SUM(sales) DESC;
 SELECT   first_name, AVG(sales)
 FROM     cookie_sales
 GROUP BY first_name;
-
+--
 SELECT   first_name, SUM(sales), MIN(sales),
          AVG(sales), MAX(sales), COUNT(sales)
 FROM     cookie_sales
 GROUP BY first_name;
-
+--
 SELECT   first_name, COUNT(sales)
 FROM     cookie_sales
 GROUP BY first_name;
-
+--
 SELECT DISTINCT sale_date
 FROM            cookie_sales
 ORDER BY        sale_date;
-
+--
 SELECT DISTINCT sale_date, first_name
 FROM            cookie_sales
 ORDER BY        first_name;
-
+--
 SELECT COUNT(DISTINCT sale_date)
 FROM   cookie_sales;
+--
+SELECT COUNT(DISTINCT first_name)
+FROM   my_contacts;
+--
+SELECT DISTINCT sale_date, first_name
+FROM            cookie_sales
+ORDER BY        first_name;
+--
+SELECT   first_name, SUM(sales), MIN(sales),
+         AVG(sales), MAX(sales), COUNT(sales)
+FROM     cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC;
+--
+SELECT   first_name, SUM(sales), MIN(sales),
+         AVG(sales), MAX(sales), COUNT(sales)
+FROM     cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC
+LIMIT 2;
+
+SELECT   first_name, SUM(sales), MIN(sales),
+         AVG(sales), MAX(sales), COUNT(sales)
+FROM     cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC
+LIMIT 1,1;
