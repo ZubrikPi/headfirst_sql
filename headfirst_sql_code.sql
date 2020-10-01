@@ -293,7 +293,7 @@ INSERT INTO clown_info
 VALUES
 ('Мистер Хобо', 'Заведение Трейси', 'М, сигара, черные волосы, маленькая шляпа', 'скрипка');
 
-SELEC FROM clown_info
+SELECT FROM clown_info
 WHERE activities = 'танцы';
 
 -- Станте командой DELETE (стр.175-176)
@@ -932,3 +932,122 @@ FROM     cookie_sales
 GROUP BY first_name
 ORDER BY SUM(sales) DESC
 LIMIT 1,1;
+
+-- локализация таблицы my_contact через UPDATE
+CREATE TABLE my_contact_2
+(
+  фамилия          VARCHAR(30)   DEFAULT NULL,
+  имя              VARCHAR(20)   DEFAULT NULL,
+  email            VARCHAR(50)   DEFAULT NULL,
+  пол              CHAR(1)       DEFAULT NULL,
+  день_рождения    DATE          DEFAULT NULL,
+  профессия        VARCHAR(30)   DEFAULT NULL,
+  место_жительства VARCHAR(30)   DEFAULT NULL,
+  статус           VARCHAR(10)   DEFAULT NULL,
+  интересы         VARCHAR (100) DEFAULT NULL,
+  ищет             VARCHAR(100)  DEFAULT NULL
+);
+
+INSERT INTO my_contact_2
+VALUES
+('Андерсон', 'Джиллиан', 'jill_anderson@breakneckpizza.com', 'Ж',
+    '1980-09-05', 'Писатель', 'Palo Alto, CA',
+    'свободна', 'каяк, рептилии', 'отношения, друзья'),
+
+('Кентон', 'Лео', 'lkenton@starbuzzcoffee.com', 'М',
+    '1974-01-10', 'Менеджер', 'San Francisco, CA',
+    'разведен', 'женщины', 'свидания'),
+
+('МакГавин', 'Даррин', 'captainlove@headfirsttheater.com', 'М',
+    '1966-01-23', 'Капитан', 'San Diego, CA',
+    'не женат', 'плаванье, рыбалка, яхтинг', 'свидания'),
+
+('Франклин', 'Джо', 'joe_franklin@leapinlimos.com', 'М',
+    '1977-04-28', 'Продавец', 'Dallas, TX',
+    'женат', 'рыбанка, выпивка', 'новая работа'),
+
+('Гамильтон', 'Джейми', 'dontbother@starbuzzcoffee.com', 'Ж',
+    '1964-09-10', 'Системный администратор', 'Princeton, NJ',
+    'замужем', 'RPG', 'ничего'),
+
+('Шевроле', 'Маурисио', 'bookman4u@objectville.net', 'M',
+    '1962-07-01', 'Владелец магазина', 'Mountain View, CA',
+    'женат', 'книги, скуба дайвинг', 'друзья'),
+
+('Крогер', 'Рене', 'poorrenee@mightygumball.net', 'Ж',
+    '1976-12-03', 'Безработный', 'San Francisco, CA',
+    'разведен', 'готовка', 'занятие'),
+
+('Мендоза', 'Анджелина', 'angelina@starbuzzcoffee.com', 'Ж',
+    '1979-08-19', 'UNIX администратор', 'San Francisco, CA',
+    'замужем', 'театр, танцы', 'новая работа'),
+
+('Мерфи', 'Дональд', 'padraic@tikibeanlounge.com', 'M',
+    '1967-01-23', 'Программист', 'New York City, NY',
+    'женат', 'RPG, анимэ', 'друзья'),
+
+('Спетнер', 'Джон', 'jpoet@objectville.net', 'M',
+    '1963-04-18', 'Продавец','Woodstock, NY',
+    'женат', 'поэзия, сценарии', 'ничего');
+
+INSERT INTO `my_contact_2`
+  (
+    `фамилия`, `имя`, `email`, `пол`,
+    `день_рождения`, `профессия`, `место_жительства`
+  )
+VALUES
+  ('Тот', 'Энн',  'Anne_Toth@leapinlimos.com', 'Ж',
+      '1969-11-18', 'Артист', 'San Francisco, CA'),
+
+  ('Мэнсон', 'Энн', 'am86@objectville.net', 'Ж',
+      '1977-08-09',  'Пекарь', 'Seattle, WA'),
+
+  ('Харди', 'Энн', 'anneh@b0tt0msup.com', 'Ж',
+      '1963-04-18', 'Учитель', 'San Francisco, CA'),
+
+  ('Паркер', 'Энн', 'annep@starbuzzcoffee.com', 'Ж',
+      '1983-01-10',  'Стедент', 'San Francisco, CA'),
+
+  ('Блант', 'Энн', 'anneblunt@breakneckpizza.com', 'Ж',
+      '1959-10-09', 'Веб дизайнер', 'San Francisco, CA'),
+
+  ('Джейкобс', 'Энн', 'anne99@objectville.net', 'Ж',
+      '1968-02-05',  'Программист', 'San Jose, CA');
+
+/* изменения в таблице my_contact_2
+ * добавление столбцов "штат" и "город" после профессии
+ * минорные исправления в орфографии
+ * разделение интересов и поиска по разным столбцам
+ */
+-- добавление колонок "город" и "штат"
+ALTER TABLE my_contact_2
+ADD COLUMN город VARCHAR(30) AFTER профессия,
+ADD COLUMN штат CHAR(2) BEFORE 'статус';
+
+-- исправления в поле F/M на Ж/М
+UPDATE my_contact_RUS
+SET пол = 'Ж'
+WHERE пол = 'F';
+
+UPDATE my_contact_RUS
+SET пол = 'М'
+WHERE пол = 'M';
+
+UPDATE my_contact_RUS
+SET интересы = 'рыбалка, выпивка'
+WHERE интересы = 'рыбанка, выпивка';
+
+-- измененение названия на my_contact_RUS
+ALTER TABLE my_contact_2
+RENAME TO my_contact_RUS;
+
+-- разделение места жительства по городу и штату
+UPDATE my_contact_RUS
+SET город = SUBSTRING_INDEX(место_жительства, ',', 1);
+
+UPDATE my_contact_RUS
+SET штат = RIGHT (место_жительства, 2);
+
+-- удаление "место_жительства"
+ALTER TABLE my_contact_RUS
+DROP COLUMN 'место_жительства';
