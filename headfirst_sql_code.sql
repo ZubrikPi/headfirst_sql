@@ -1048,6 +1048,6 @@ SET город = SUBSTRING_INDEX(место_жительства, ',', 1);
 UPDATE my_contact_RUS
 SET штат = RIGHT (место_жительства, 2);
 
--- удаление место_жительства
+-- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
-DROP COLUMN место_жительства;
+DROP COLUMN 'место_жительства';
