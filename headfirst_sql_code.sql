@@ -1051,3 +1051,18 @@ SET штат = RIGHT (место_жительства, 2);
 -- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
+
+ALTER TABLE my_contact_RUS
+RENAME TO my_contacts_2;
+
+ALTER TABLE my_contacts_2
+CHANGE COLUMN фамилия last_name VARCHAR(20),
+CHANGE COLUMN имя first_name VARCHAR(20),
+CHANGE COLUMN пол gender CHAR(1),
+CHANGE COLUMN день_рождения birthday DATE,
+CHANGE COLUMN профессия profession VARCHAR(50),
+CHANGE COLUMN интересы interests VARCHAR(100),
+CHANGE COLUMN ищет seeking VARCHAR(100),
+CHANGE COLUMN город city VARCHAR(30),
+CHANGE COLUMN штат state CHAR(2),
+CHANGE COLUMN статус status VARCHAR(20);
