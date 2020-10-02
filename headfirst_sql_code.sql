@@ -964,7 +964,7 @@ VALUES
 
 ('Франклин', 'Джо', 'joe_franklin@leapinlimos.com', 'М',
     '1977-04-28', 'Продавец', 'Dallas, TX',
-    'женат', 'рыбанка, выпивка', 'новая работа'),
+    'женат', 'рыбалка, выпивка', 'новая работа'),
 
 ('Гамильтон', 'Джейми', 'dontbother@starbuzzcoffee.com', 'Ж',
     '1964-09-10', 'Системный администратор', 'Princeton, NJ',
@@ -1033,21 +1033,65 @@ UPDATE my_contact_RUS
 SET пол = 'М'
 WHERE пол = 'M';
 
-UPDATE my_contact_RUS
-SET интересы = 'рыбалка, выпивка'
-WHERE интересы = 'рыбанка, выпивка';
+ALTER TABLE my_contacts
+  ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+  PRIMARY KEY('contact_id');
 
--- измененение названия на my_contact_RUS
-ALTER TABLE my_contact_2
-RENAME TO my_contact_RUS;
+ALTER TABLE my_contacts
+  ADD COLUMN interest1 VARCHAR(20) AFTER seeking,
+  ADD COLUMN interest2 VARCHAR(20) AFTER interest1,
+  ADD COLUMN interest3 VARCHAR(20) AFTER interest2,
+  ADD COLUMN interest4 VARCHAR(20) AFTER interest3;
 
--- разделение места жительства по городу и штату
-UPDATE my_contact_RUS
-SET город = SUBSTRING_INDEX(место_жительства, ',', 1);
+--запрос
+SELECT SUBSTRING_INDEX(interests, ',', 1)
+FROM my_contacts;
+-- команда 1
+UPDATE my_contacts
+SET interest1 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest1)+1)));
 
+<<<<<<< Updated upstream
 UPDATE my_contact_RUS
 SET штат = RIGHT (место_жительства, 2);
 
 -- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
+=======
+-- команда 2
+UPDATE my_contacts
+SET interest2 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest2)+1)));
+
+-- команда 3
+UPDATE my_contacts
+SET interest3 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest3)+1)));
+
+ALTER TABLE my_contacts
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+
+-- ALTER TABLE my_contacts
+-- DROP COLUMN location;
+--
+-- UPDATE my_contacts
+-- SET interests = NULL
+-- WHERE interests = 'ы';
+-- WHERE interests = 'G',
+-- WHERE interests = 'а';
+--
+-- ALTER TABLE my_contacts
+--   ADD COLUMN city VARCHAR(30),
+--   ADD COLUMN state VARCHAR(2);
+--
+-- UPDATE my_contacts
+-- SET city = SUBSTRING_INDEX(location, ',', 1);
+--
+-- UPDATE my_contacts
+-- SET state = RIGHT (location, 2);
+>>>>>>> Stashed changes
