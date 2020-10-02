@@ -1052,14 +1052,13 @@ SET interest1 = SUBSTRING_INDEX(interests, ',', 1);
 UPDATE my_contacts
 SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest1)+1)));
 
-<<<<<<< Updated upstream
 UPDATE my_contact_RUS
 SET штат = RIGHT (место_жительства, 2);
 
 -- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
-=======
+
 -- команда 2
 UPDATE my_contacts
 SET interest2 = SUBSTRING_INDEX(interests, ',', 1);
@@ -1094,4 +1093,3 @@ ADD PRIMARY KEY (contact_id);
 --
 -- UPDATE my_contacts
 -- SET state = RIGHT (location, 2);
->>>>>>> Stashed changes
