@@ -1093,3 +1093,21 @@ ADD PRIMARY KEY (contact_id);
 --
 -- UPDATE my_contacts
 -- SET state = RIGHT (location, 2);
+
+-- создание таблицы intersts (337) c внешним ключом
+CREATE TABLE interests (
+  int_id     INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  intersts   VARCHAR(50) NOT NULL,
+  contact_id INT         NOT NULL,
+  CONSTRAINT my_contacts_contact_id_fk
+  /* CONSTRAINT - это ограничение.
+    Ограничению присваивается имя, по которому можно определить
+    из какой таблицы взят ключ (my_contacts),
+    как он называется (contact_id) и что
+    ключ является внешним (fk, от Foreign Key).
+    MUL - означает, что одно значение может храниться
+    в столбце в нескольких экземплярах.
+  */
+  FOREIGN KEY (contact_id)
+  REFERENCES my_contacts (contact_id)
+);
