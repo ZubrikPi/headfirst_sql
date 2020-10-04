@@ -964,7 +964,7 @@ VALUES
 
 ('Франклин', 'Джо', 'joe_franklin@leapinlimos.com', 'М',
     '1977-04-28', 'Продавец', 'Dallas, TX',
-    'женат', 'рыбанка, выпивка', 'новая работа'),
+    'женат', 'рыбалка, выпивка', 'новая работа'),
 
 ('Гамильтон', 'Джейми', 'dontbother@starbuzzcoffee.com', 'Ж',
     '1964-09-10', 'Системный администратор', 'Princeton, NJ',
@@ -1033,17 +1033,24 @@ UPDATE my_contact_RUS
 SET пол = 'М'
 WHERE пол = 'M';
 
-UPDATE my_contact_RUS
-SET интересы = 'рыбалка, выпивка'
-WHERE интересы = 'рыбанка, выпивка';
+ALTER TABLE my_contacts
+  ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+  PRIMARY KEY('contact_id');
 
--- измененение названия на my_contact_RUS
-ALTER TABLE my_contact_2
-RENAME TO my_contact_RUS;
+ALTER TABLE my_contacts
+  ADD COLUMN interest1 VARCHAR(20) AFTER seeking,
+  ADD COLUMN interest2 VARCHAR(20) AFTER interest1,
+  ADD COLUMN interest3 VARCHAR(20) AFTER interest2,
+  ADD COLUMN interest4 VARCHAR(20) AFTER interest3;
 
--- разделение места жительства по городу и штату
-UPDATE my_contact_RUS
-SET город = SUBSTRING_INDEX(место_жительства, ',', 1);
+--запрос
+SELECT SUBSTRING_INDEX(interests, ',', 1)
+FROM my_contacts;
+-- команда 1
+UPDATE my_contacts
+SET interest1 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest1)+1)));
 
 UPDATE my_contact_RUS
 SET штат = RIGHT (место_жительства, 2);
@@ -1051,18 +1058,3 @@ SET штат = RIGHT (место_жительства, 2);
 -- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
-
-ALTER TABLE my_contact_RUS
-RENAME TO my_contacts_2;
-
-ALTER TABLE my_contacts_2
-CHANGE COLUMN фамилия last_name VARCHAR(20),
-CHANGE COLUMN имя first_name VARCHAR(20),
-CHANGE COLUMN пол gender CHAR(1),
-CHANGE COLUMN день_рождения birthday DATE,
-CHANGE COLUMN профессия profession VARCHAR(50),
-CHANGE COLUMN интересы interests VARCHAR(100),
-CHANGE COLUMN ищет seeking VARCHAR(100),
-CHANGE COLUMN город city VARCHAR(30),
-CHANGE COLUMN штат state CHAR(2),
-CHANGE COLUMN статус status VARCHAR(20);
