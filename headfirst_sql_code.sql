@@ -1111,3 +1111,5 @@ CREATE TABLE interests (
   FOREIGN KEY (contact_id)
   REFERENCES my_contacts (contact_id)
 );
+
+-- 
