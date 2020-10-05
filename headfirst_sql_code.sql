@@ -1050,7 +1050,9 @@ FROM my_contacts;
 UPDATE my_contacts
 SET interest1 = SUBSTRING_INDEX(interests, ',', 1);
 UPDATE my_contacts
-SET interests = TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest1)+1)));
+SET
+  interests =
+    TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest1)+1)));
 
 UPDATE my_contact_RUS
 SET штат = RIGHT (место_жительства, 2);
@@ -1058,3 +1060,62 @@ SET штат = RIGHT (место_жительства, 2);
 -- удаление "место_жительства"
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
+
+<<<<<<< new_try
+-- команда 2
+UPDATE my_contacts
+SET interest2 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET
+  interests =
+    TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest2)+1)));
+
+-- команда 3
+UPDATE my_contacts
+SET interest3 = SUBSTRING_INDEX(interests, ',', 1);
+UPDATE my_contacts
+SET
+  interests =
+    TRIM(RIGHT(interests,(LENGTH(interests))-(LENGTH(interest3)+1)));
+
+ALTER TABLE my_contacts
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+
+-- ALTER TABLE my_contacts
+-- DROP COLUMN location;
+--
+-- UPDATE my_contacts
+-- SET interests = NULL
+-- WHERE interests = 'ы';
+-- WHERE interests = 'G',
+-- WHERE interests = 'а';
+--
+-- ALTER TABLE my_contacts
+--   ADD COLUMN city VARCHAR(30),
+--   ADD COLUMN state VARCHAR(2);
+--
+-- UPDATE my_contacts
+-- SET city = SUBSTRING_INDEX(location, ',', 1);
+--
+-- UPDATE my_contacts
+-- SET state = RIGHT (location, 2);
+
+-- создание таблицы intersts (337) c внешним ключом
+CREATE TABLE interests (
+  int_id     INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  intersts   VARCHAR(50) NOT NULL,
+  contact_id INT         NOT NULL,
+  CONSTRAINT my_contacts_contact_id_fk
+  /* CONSTRAINT - это ограничение.
+    Ограничению присваивается имя, по которому можно определить
+    из какой таблицы взят ключ (my_contacts),
+    как он называется (contact_id) и что
+    ключ является внешним (fk, от Foreign Key).
+    MUL - означает, что одно значение может храниться
+    в столбце в нескольких экземплярах.
+  */
+  FOREIGN KEY (contact_id)
+  REFERENCES my_contacts (contact_id)
+);
+-- 
