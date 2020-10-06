@@ -1174,17 +1174,54 @@ INSERT INTO woman (woman_name)
 
 🤨
 CREATE TABLE shoes (
-  shoe_id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  shoe_name VARCHAR(10)   DEFAULT NULL,
-  woman_id  INT         NOT NULL,
-  CONSTRAINT woman_woman_id_fk
-  FOREIGN KEY (woman_id)
-  REFERENCES woman (woman_id)
+  shoe_id    INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  shoes_name VARCHAR(10) DEFAULT NULL,
+  woman_id   INT         NOT NULL,
+  CONSTRAINT             woman_woman_id_fk
+  FOREIGN KEY                   (woman_id)
+  REFERENCES             woman  (woman_id)
 );
-INSERT INTO shoes (shoe_name)
+INSERT INTO `shoes` (`shoes_name`)
 VALUES
   ('Сандали'),
   ('Сабо'),
   ('Шлепанцы'),
   ('Туфли');
 -- ERROR 1364 (HY000): Field 'woman_id' doesn't have a default value --
+
+-- таблица супергероев
+CREATE TABLE super_heroes (
+  name       VARCHAR(20) NOT NULL,
+  power      VARCHAR(50) NOT NULL default '',
+  weakness   VARCHAR(20) NOT NULL default '',
+  city       VARCHAR(20) NOT NULL,
+  country    VARCHAR(20) NOT NULL,
+  arch_enemy VARCHAR(50) NOT NULL,
+  initials   VARCHAR (2) NOT NULL
+);
+
+INSERT INTO `super_heroes`
+(`name`,`power`,`weakness`,`city`,`country`,`arch_enemy`,`initials`)
+VALUES
+ ('Super Trashman','Cleans quickly','bleach',
+   'Gotham','US','Verminator','ST'),
+ ('The Broker','Makes money from nothing','',
+   'New York','US','Mister Taxman','TB'),
+ ('Super Guy','Flies','birds',
+   'Metropolis','US','Super Fella','SG'),
+ ('Wonder Waiter','Never forgets an order','insects',
+   'Paris','France','All You Can Eat Girl','WW'),
+ ('Dirtman','Creates dust storms','bleach',
+   'Tulsa','US','Hoover','D'),
+ ('Super Guy','Super strength','aluminum',
+   'Metropolis','US','Badman','SG'),
+ ('Furious Woman','Gets really, really angry','',
+   'Rome','Italy','The Therapist','FW'),
+ ('The Toad','Tongue of Justice','insects',
+   'London','England','Heron','T'),
+ ('Librarian','Can find anything','children',
+   'Springfield','US','Chaos Creep','L'),
+ ('Goose Girl','Flies','',
+   'Minneapolis','US','The Quilter','GG'),
+ ('Stick Man','Stands in for humans','hang man',
+   'London','England','Eraserman','SM');
