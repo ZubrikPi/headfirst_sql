@@ -2,15 +2,15 @@
 CREATE TABLE my_contacts
 (
   first_name VARCHAR(20),
-  last_name VARCHAR(20),
-  email VARCHAR(50),
-  gender CHAR(1),
-  birthday DATE,
+  last_name  VARCHAR(20),
+  email      VARCHAR(50),
+  gender     CHAR(1),
+  birthday   DATE,
   profession VARCHAR(50),
-  location VARCHAR(50),
-  status VARCHAR(20),
-  interests VARCHAR(100),
-  seeking VARCHAR(100)
+  location   VARCHAR(50),
+  status     VARCHAR(20),
+  interests  VARCHAR(100),
+  seeking    VARCHAR(100)
 );
 --
 
@@ -19,10 +19,10 @@ CREATE DATABASE drinks;
 CREATE TABLE easy_drinks
 (
   drink_name VARCHAR(20),
-  main VARCHAR(20),
-  amount1 DEC(4,2),
-  second VARCHAR(20),
-  amount2 DEC(4,2),
+  main       VARCHAR(20),
+  amount1    DECIMAL(4,2),
+  second     VARCHAR(20),
+  amount2    DECIMAL(4,2),
   directions VARCHAR(255)
 );
 
@@ -65,33 +65,33 @@ SELECT * FROM easy_drinks WHERE amount1 = '1.5'
 CREATE TABLE drink_info
 (
   drink_name VARCHAR(20),
-  cost DEC(4,2),
-  carbs DEC(5,2),
-  color VARCHAR(20),
-  ice CHAR,
-  calories INT(3)
+  cost       DECIMAL(4,2),
+  carbs      DECIMAL(5,2),
+  color      VARCHAR(20),
+  ice        CHAR,
+  calories   INT(3)
 );
 
 INSERT INTO drink_info
 VALUES
-('Терновник', 3, 8.4, 'желтый', 'Д', 33),
-('Голубая луна', 2.5, 3.2, 'синий', 'Д', 12),
-('Вот тебе на', 3.5, 8.6, 'оранжевый', 'Д', 35),
-('Лаймовый фризз', 2.5, 5.4, 'зеленый', 'Д', 24),
-('Поцелуй', 5.5, 42.5, 'фиолетовый', 'Д', 171),
-('Горячее золото', 3.2, 32.1, 'оранжевый', 'Н', 135),
-('Одинокое дерево', 3.6, 4.2, 'красный', 'Д', 17),
-('Борзая', 4, 14, 'желтый', 'Д', 50),
-('Бабье лето', 2.8, 7.2, 'коричневый', 'Н', 30),
-('Лягушка', 2.6, 21.5, 'бронзовый', 'Д', 80),
-('Сода плюс', 3.8, 4.7, 'красный', 'Н', 19);
+('Терновник',       3,   8.4,  'желтый',     'Д', 33),
+('Голубая луна',    2.5, 3.2,  'синий',      'Д', 12),
+('Вот тебе на',     3.5, 8.6,  'оранжевый',  'Д', 35),
+('Лаймовый фризз',  2.5, 5.4,  'зеленый',    'Д', 24),
+('Поцелуй',         5.5, 42.5, 'фиолетовый', 'Д', 171),
+('Горячее золото',  3.2, 32.1, 'оранжевый',  'Н', 135),
+('Одинокое дерево', 3.6, 4.2,  'красный',    'Д', 17),
+('Борзая',          4,   14,   'желтый',     'Д', 50),
+('Бабье лето',      2.8, 7.2,  'коричневый', 'Н', 30),
+('Лягушка',         2.6, 21.5, 'бронзовый',  'Д', 80),
+('Сода плюс',       3.8, 4.7,  'красный',    'Н', 19);
 
 --Возьми в руку карандаш (стр. 123)
 --Цены желтых напитков со льдом, содержащих более 33 калорий.
 SELECT cost FROM drink_info
-WHERE ice = 'Д'
-and color = 'желтый'
-and calories > 33;
+WHERE  ice   = 'Д'
+and    color = 'желтый'
+and    calories > 33;
 
 --Названия и цвета напитков, содержащих не более 4 граммов углеводов,
 ----в которые кладется лед.
@@ -1062,16 +1062,16 @@ VALUES
 -- добавление колонок "город" и "штат"
 ALTER TABLE my_contact_2
 ADD COLUMN город VARCHAR(30) AFTER профессия,
-ADD COLUMN штат CHAR(2) BEFORE 'статус';
+ADD COLUMN штат  CHAR(2)     BEFORE 'статус';
 
 -- исправления в поле F/M на Ж/М
 UPDATE my_contact_RUS
-SET пол = 'Ж'
-WHERE пол = 'F';
+SET    пол = 'Ж'
+WHERE  пол = 'F';
 
 UPDATE my_contact_RUS
-SET пол = 'М'
-WHERE пол = 'M';
+SET    пол = 'М'
+WHERE  пол = 'M';
 
 ALTER TABLE my_contacts
   ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
