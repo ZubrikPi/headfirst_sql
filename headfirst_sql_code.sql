@@ -1225,3 +1225,5 @@ VALUES
    'Minneapolis','US','The Quilter','GG'),
  ('Stick Man','Stands in for humans','hang man',
    'London','England','Eraserman','SM');
+
+--
