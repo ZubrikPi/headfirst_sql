@@ -234,13 +234,6 @@ SELECT drink_name FROM easy_drinks
 WHERE calories >= 20;
 
 -- Таблица clown_info (стр.155)
-CREATE TABLE clown_info (
-  name        VARCHAR(20),
-  last_seen   VARCHAR(50),
-  appearance  VARCHAR(60),
-  activities  VARCHAR(40)
-);
-
 INSERT INTO clown_info
 VALUES
 ('Элси', 'Дом престарелых Черри Хилл',
@@ -274,7 +267,6 @@ VALUES
 ('Снифлз', 'Заведение Трейси',
   'М, зелено-фиолетовый костюс, длинный нос', NULL);
 
---исправления со стр.158
 INSERT INTO clown_info
 VALUES
 ('Снаглз', 'Болмарт',
@@ -291,6 +283,14 @@ VALUES
 
 ('Снифлз', 'Заведение Трейси',
   'М, зелено-фиолетовый костюс, длинный нос', 'разъезжает на машинке');
+
+--исправления со стр.158
+CREATE TABLE clown_info (
+                            name        VARCHAR(20),
+                            last_seen   VARCHAR(50),
+                            activities  VARCHAR(40)
+                                appearance  VARCHAR(60),
+);
 
 DELETE FROM clown_info WHERE activities = 'танцы';
 
@@ -837,7 +837,7 @@ SELECT contact_id, last_name, first_name
 FROM my_contacts
 ORDER BY last_name;
 
-SELECT* FROM my_contacts
+SELECT * FROM my_contacts
 ORDER BY birthday;
 
 -- Задание (286)
@@ -1101,7 +1101,7 @@ SET штат = RIGHT (место_жительства, 2);
 ALTER TABLE my_contact_RUS
 DROP COLUMN 'место_жительства';
 
-<<<<<<< new_try
+-- new_try
 -- команда 2
 UPDATE my_contacts
 SET interest2 = SUBSTRING_INDEX(interests, ',', 1);
